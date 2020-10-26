@@ -1,0 +1,249 @@
+{
+    "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+    "id": "21539",
+    "self": "https://makingsense.atlassian.net/rest/api/2/issue/21539",
+    "key": "FI-56",
+    "fields": {
+        "statuscategorychangedate": "2020-09-24T09:49:48.828-0300",
+        "customfield_10110": null,
+        "fixVersions": [],
+        "customfield_10111": null,
+        "customfield_10112": null,
+        "resolution": null,
+        "customfield_10113": null,
+        "customfield_10114": null,
+        "customfield_10106": null,
+        "customfield_10108": null,
+        "customfield_10109": null,
+        "lastViewed": "2020-10-22T09:40:56.487-0300",
+        "priority": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/priority/3",
+            "iconUrl": "https://makingsense.atlassian.net/images/icons/priorities/medium.svg",
+            "name": "Medium",
+            "id": "3"
+        },
+        "customfield_10100": null,
+        "customfield_10101": null,
+        "labels": [],
+        "aggregatetimeoriginalestimate": null,
+        "timeestimate": null,
+        "versions": [],
+        "issuelinks": [],
+        "assignee": null,
+        "status": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/status/1",
+            "description": "La incidencia está abierta y lista para que el responsable empiece a trabajar en ella.",
+            "iconUrl": "https://makingsense.atlassian.net/images/icons/statuses/open.png",
+            "name": "Abierta",
+            "id": "1",
+            "statusCategory": {
+                "self": "https://makingsense.atlassian.net/rest/api/2/statuscategory/2",
+                "id": 2,
+                "key": "new",
+                "colorName": "blue-gray",
+                "name": "Por hacer"
+            }
+        },
+        "components": [],
+        "aggregatetimeestimate": null,
+        "creator": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/user?accountId=5f0c6c24591bbc001b8cfbdf",
+            "accountId": "5f0c6c24591bbc001b8cfbdf",
+            "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5f0c6c24591bbc001b8cfbdf/9a8eac47-7274-4cef-ab63-b73e1cfde7c5/48",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5f0c6c24591bbc001b8cfbdf/9a8eac47-7274-4cef-ab63-b73e1cfde7c5/24",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5f0c6c24591bbc001b8cfbdf/9a8eac47-7274-4cef-ab63-b73e1cfde7c5/16",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5f0c6c24591bbc001b8cfbdf/9a8eac47-7274-4cef-ab63-b73e1cfde7c5/32"
+            },
+            "displayName": "Gabriel Dominguez",
+            "active": true,
+            "timeZone": "America/Argentina/Buenos_Aires",
+            "accountType": "atlassian"
+        },
+        "subtasks": [],
+        "customfield_10160": null,
+        "customfield_10161": "2020-09-24",
+        "customfield_10162": "2020-09-30",
+        "customfield_10163": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/customFieldOption/10259",
+            "value": "Making Sense LLC",
+            "id": "10259"
+        },
+        "reporter": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/user?accountId=5f0c6c24591bbc001b8cfbdf",
+            "accountId": "5f0c6c24591bbc001b8cfbdf",
+            "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5f0c6c24591bbc001b8cfbdf/9a8eac47-7274-4cef-ab63-b73e1cfde7c5/48",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5f0c6c24591bbc001b8cfbdf/9a8eac47-7274-4cef-ab63-b73e1cfde7c5/24",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5f0c6c24591bbc001b8cfbdf/9a8eac47-7274-4cef-ab63-b73e1cfde7c5/16",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5f0c6c24591bbc001b8cfbdf/9a8eac47-7274-4cef-ab63-b73e1cfde7c5/32"
+            },
+            "displayName": "Gabriel Dominguez",
+            "active": true,
+            "timeZone": "America/Argentina/Buenos_Aires",
+            "accountType": "atlassian"
+        },
+        "customfield_10164": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/customFieldOption/10262",
+            "value": "Services",
+            "id": "10262"
+        },
+        "customfield_10165": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/customFieldOption/10266",
+            "value": "Development",
+            "id": "10266"
+        },
+        "aggregateprogress": {
+            "progress": 0,
+            "total": 0
+        },
+        "customfield_10166": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/customFieldOption/10277",
+            "value": "Making Sense",
+            "id": "10277"
+        },
+        "customfield_10167": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/customFieldOption/10295",
+            "value": "Development Department Activities",
+            "id": "10295"
+        },
+        "customfield_10168": 1,
+        "customfield_10169": 23,
+        "customfield_10159": null,
+        "progress": {
+            "progress": 0,
+            "total": 0
+        },
+        "votes": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/issue/FI-56/votes",
+            "votes": 0,
+            "hasVoted": false
+        },
+        "worklog": {
+            "startAt": 0,
+            "maxResults": 20,
+            "total": 0,
+            "worklogs": []
+        },
+        "issuetype": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/issuetype/10341",
+            "id": "10341",
+            "description": "",
+            "iconUrl": "https://makingsense.atlassian.net/secure/viewavatar?size=medium&avatarId=10300&avatarType=issuetype",
+            "name": "Jira- Sap (NO USAR)",
+            "subtask": false,
+            "avatarId": 10300
+        },
+        "timespent": null,
+        "customfield_10150": null,
+        "customfield_10151": null,
+        "customfield_10152": null,
+        "project": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/project/10023",
+            "id": "10023",
+            "key": "FI",
+            "name": "Finance",
+            "projectTypeKey": "software",
+            "simplified": false,
+            "avatarUrls": {
+                "48x48": "https://makingsense.atlassian.net/secure/projectavatar?pid=10023&avatarId=10623",
+                "24x24": "https://makingsense.atlassian.net/secure/projectavatar?size=small&s=small&pid=10023&avatarId=10623",
+                "16x16": "https://makingsense.atlassian.net/secure/projectavatar?size=xsmall&s=xsmall&pid=10023&avatarId=10623",
+                "32x32": "https://makingsense.atlassian.net/secure/projectavatar?size=medium&s=medium&pid=10023&avatarId=10623"
+            },
+            "projectCategory": {
+                "self": "https://makingsense.atlassian.net/rest/api/2/projectCategory/10001",
+                "id": "10001",
+                "description": "Making Sense",
+                "name": "Common"
+            }
+        },
+        "customfield_10153": null,
+        "customfield_10154": null,
+        "aggregatetimespent": null,
+        "customfield_10156": null,
+        "customfield_10157": null,
+        "customfield_10158": null,
+        "customfield_10148": null,
+        "customfield_10149": null,
+        "resolutiondate": null,
+        "workratio": -1,
+        "watches": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/issue/FI-56/watchers",
+            "watchCount": 1,
+            "isWatching": false
+        },
+        "issuerestriction": {
+            "issuerestrictions": {},
+            "shouldDisplay": false
+        },
+        "created": "2020-09-24T09:49:48.489-0300",
+        "customfield_10140": null,
+        "customfield_10020": null,
+        "customfield_10021": null,
+        "customfield_10142": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/customFieldOption/10225",
+            "value": "Common",
+            "id": "10225"
+        },
+        "customfield_10143": null,
+        "customfield_10144": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/customFieldOption/10241",
+            "value": "Vendor",
+            "id": "10241"
+        },
+        "customfield_10146": null,
+        "customfield_10147": null,
+        "customfield_10016": null,
+        "customfield_10138": "Information about workflow of this issue type\r\n\r\nhttps://docs.google.com/document/d/1o0t3A-iz0o52_FiSMuwqbVVWOKpPbw05MimoIXPNk9M/edit?usp=sharing",
+        "customfield_10017": null,
+        "customfield_10018": {
+            "hasEpicLinkFieldDependency": false,
+            "showField": false,
+            "nonEditableReason": {
+                "reason": "PLUGIN_LICENSE_ERROR",
+                "message": "El enlace principal solo está disponible para los usuarios de Jira Premium."
+            }
+        },
+        "customfield_10139": null,
+        "customfield_10019": "0|i01o5u:",
+        "updated": "2020-09-24T09:49:48.489-0300",
+        "timeoriginalestimate": null,
+        "description": "Compra de licencia de udemy",
+        "customfield_10130": null,
+        "customfield_10010": null,
+        "customfield_10131": null,
+        "customfield_10014": null,
+        "timetracking": {},
+        "customfield_10015": null,
+        "customfield_10005": null,
+        "customfield_10006": null,
+        "customfield_10127": null,
+        "security": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/securitylevel/10006",
+            "id": "10006",
+            "description": "",
+            "name": "Only COO and CFO can view issues"
+        },
+        "customfield_10007": null,
+        "customfield_10129": null,
+        "customfield_10008": null,
+        "customfield_10009": null,
+        "attachment": [],
+        "summary": "Prueba de compra para envio a SAP",
+        "customfield_10000": "{}",
+        "customfield_10001": null,
+        "customfield_10002": null,
+        "customfield_10003": null,
+        "customfield_10125": null,
+        "customfield_10004": null,
+        "environment": null,
+        "duedate": null,
+        "comment": {
+            "comments": [],
+            "maxResults": 0,
+            "total": 0,
+            "startAt": 0
+        }
+    }
+}

@@ -1,0 +1,251 @@
+{
+    "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+    "id": "22326",
+    "self": "https://makingsense.atlassian.net/rest/api/2/issue/22326",
+    "key": "FI-59",
+    "fields": {
+        "statuscategorychangedate": "2020-10-21T14:52:41.463-0300",
+        "customfield_10110": null,
+        "fixVersions": [],
+        "customfield_10111": null,
+        "resolution": null,
+        "customfield_10112": null,
+        "customfield_10113": null,
+        "customfield_10114": null,
+        "customfield_10106": null,
+        "customfield_10108": null,
+        "customfield_10109": null,
+        "lastViewed": "2020-10-22T09:28:21.563-0300",
+        "priority": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/priority/3",
+            "iconUrl": "https://makingsense.atlassian.net/images/icons/priorities/medium.svg",
+            "name": "Medium",
+            "id": "3"
+        },
+        "customfield_10100": null,
+        "customfield_10101": null,
+        "labels": [],
+        "aggregatetimeoriginalestimate": null,
+        "timeestimate": null,
+        "versions": [],
+        "issuelinks": [],
+        "assignee": null,
+        "status": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/status/1",
+            "description": "La incidencia está abierta y lista para que el responsable empiece a trabajar en ella.",
+            "iconUrl": "https://makingsense.atlassian.net/images/icons/statuses/open.png",
+            "name": "Abierta",
+            "id": "1",
+            "statusCategory": {
+                "self": "https://makingsense.atlassian.net/rest/api/2/statuscategory/2",
+                "id": 2,
+                "key": "new",
+                "colorName": "blue-gray",
+                "name": "Por hacer"
+            }
+        },
+        "components": [],
+        "aggregatetimeestimate": null,
+        "creator": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/user?accountId=5cc06899788c400fcdcebdda",
+            "accountId": "5cc06899788c400fcdcebdda",
+            "emailAddress": "server@makingsense.com",
+            "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/5164504a5905a4c259146f1f5fad1ecd?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMS-2.png",
+                "24x24": "https://secure.gravatar.com/avatar/5164504a5905a4c259146f1f5fad1ecd?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMS-2.png",
+                "16x16": "https://secure.gravatar.com/avatar/5164504a5905a4c259146f1f5fad1ecd?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMS-2.png",
+                "32x32": "https://secure.gravatar.com/avatar/5164504a5905a4c259146f1f5fad1ecd?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMS-2.png"
+            },
+            "displayName": "MS Server",
+            "active": true,
+            "timeZone": "America/Argentina/Buenos_Aires",
+            "accountType": "atlassian"
+        },
+        "subtasks": [],
+        "customfield_10160": null,
+        "customfield_10161": "2020-10-19",
+        "customfield_10162": "2020-10-21",
+        "customfield_10163": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/customFieldOption/10259",
+            "value": "Making Sense LLC",
+            "id": "10259"
+        },
+        "customfield_10164": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/customFieldOption/10262",
+            "value": "Services",
+            "id": "10262"
+        },
+        "reporter": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/user?accountId=5cc06899788c400fcdcebdda",
+            "accountId": "5cc06899788c400fcdcebdda",
+            "emailAddress": "server@makingsense.com",
+            "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/5164504a5905a4c259146f1f5fad1ecd?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMS-2.png",
+                "24x24": "https://secure.gravatar.com/avatar/5164504a5905a4c259146f1f5fad1ecd?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMS-2.png",
+                "16x16": "https://secure.gravatar.com/avatar/5164504a5905a4c259146f1f5fad1ecd?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMS-2.png",
+                "32x32": "https://secure.gravatar.com/avatar/5164504a5905a4c259146f1f5fad1ecd?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMS-2.png"
+            },
+            "displayName": "MS Server",
+            "active": true,
+            "timeZone": "America/Argentina/Buenos_Aires",
+            "accountType": "atlassian"
+        },
+        "aggregateprogress": {
+            "progress": 0,
+            "total": 0
+        },
+        "customfield_10165": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/customFieldOption/10267",
+            "value": "IT",
+            "id": "10267"
+        },
+        "customfield_10166": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/customFieldOption/10277",
+            "value": "Making Sense",
+            "id": "10277"
+        },
+        "customfield_10167": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/customFieldOption/10295",
+            "value": "Development Department Activities",
+            "id": "10295"
+        },
+        "customfield_10168": 3,
+        "customfield_10169": 150,
+        "customfield_10159": null,
+        "progress": {
+            "progress": 0,
+            "total": 0
+        },
+        "votes": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/issue/FI-59/votes",
+            "votes": 0,
+            "hasVoted": false
+        },
+        "worklog": {
+            "startAt": 0,
+            "maxResults": 20,
+            "total": 0,
+            "worklogs": []
+        },
+        "issuetype": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/issuetype/10341",
+            "id": "10341",
+            "description": "",
+            "iconUrl": "https://makingsense.atlassian.net/secure/viewavatar?size=medium&avatarId=10300&avatarType=issuetype",
+            "name": "Jira- Sap (NO USAR)",
+            "subtask": false,
+            "avatarId": 10300
+        },
+        "timespent": null,
+        "customfield_10150": null,
+        "customfield_10151": null,
+        "project": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/project/10023",
+            "id": "10023",
+            "key": "FI",
+            "name": "Finance",
+            "projectTypeKey": "software",
+            "simplified": false,
+            "avatarUrls": {
+                "48x48": "https://makingsense.atlassian.net/secure/projectavatar?pid=10023&avatarId=10623",
+                "24x24": "https://makingsense.atlassian.net/secure/projectavatar?size=small&s=small&pid=10023&avatarId=10623",
+                "16x16": "https://makingsense.atlassian.net/secure/projectavatar?size=xsmall&s=xsmall&pid=10023&avatarId=10623",
+                "32x32": "https://makingsense.atlassian.net/secure/projectavatar?size=medium&s=medium&pid=10023&avatarId=10623"
+            },
+            "projectCategory": {
+                "self": "https://makingsense.atlassian.net/rest/api/2/projectCategory/10001",
+                "id": "10001",
+                "description": "Making Sense",
+                "name": "Common"
+            }
+        },
+        "customfield_10152": null,
+        "customfield_10153": null,
+        "customfield_10154": null,
+        "aggregatetimespent": null,
+        "customfield_10156": null,
+        "customfield_10157": null,
+        "customfield_10158": null,
+        "customfield_10148": null,
+        "customfield_10149": null,
+        "resolutiondate": null,
+        "workratio": -1,
+        "issuerestriction": {
+            "issuerestrictions": {},
+            "shouldDisplay": false
+        },
+        "watches": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/issue/FI-59/watchers",
+            "watchCount": 1,
+            "isWatching": true
+        },
+        "created": "2020-10-21T14:52:41.179-0300",
+        "customfield_10140": null,
+        "customfield_10020": null,
+        "customfield_10142": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/customFieldOption/10225",
+            "value": "Common",
+            "id": "10225"
+        },
+        "customfield_10021": null,
+        "customfield_10143": null,
+        "customfield_10144": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/customFieldOption/10241",
+            "value": "Vendor",
+            "id": "10241"
+        },
+        "customfield_10146": "2020-10-14",
+        "customfield_10147": null,
+        "customfield_10016": null,
+        "customfield_10138": "Information about workflow of this issue type\r\n\r\nhttps://docs.google.com/document/d/1o0t3A-iz0o52_FiSMuwqbVVWOKpPbw05MimoIXPNk9M/edit?usp=sharing",
+        "customfield_10017": null,
+        "customfield_10139": null,
+        "customfield_10018": {
+            "hasEpicLinkFieldDependency": false,
+            "showField": false,
+            "nonEditableReason": {
+                "reason": "PLUGIN_LICENSE_ERROR",
+                "message": "El enlace principal solo está disponible para los usuarios de Jira Premium."
+            }
+        },
+        "customfield_10019": "0|i01rye:",
+        "updated": "2020-10-21T15:46:53.418-0300",
+        "timeoriginalestimate": null,
+        "customfield_10130": null,
+        "description": "Brief description",
+        "customfield_10010": null,
+        "customfield_10131": null,
+        "customfield_10014": null,
+        "timetracking": {},
+        "customfield_10015": null,
+        "customfield_10005": null,
+        "customfield_10127": null,
+        "customfield_10006": null,
+        "security": {
+            "self": "https://makingsense.atlassian.net/rest/api/2/securitylevel/10006",
+            "id": "10006",
+            "description": "",
+            "name": "Only COO and CFO can view issues"
+        },
+        "customfield_10007": null,
+        "customfield_10129": null,
+        "customfield_10008": null,
+        "attachment": [],
+        "customfield_10009": null,
+        "summary": "Mati Test",
+        "customfield_10000": "{}",
+        "customfield_10001": null,
+        "customfield_10002": null,
+        "customfield_10003": null,
+        "customfield_10004": null,
+        "customfield_10125": null,
+        "environment": null,
+        "duedate": null,
+        "comment": {
+            "comments": [],
+            "maxResults": 0,
+            "total": 0,
+            "startAt": 0
+        }
+    }
+}

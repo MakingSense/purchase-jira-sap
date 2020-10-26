@@ -1,0 +1,109 @@
+BUSINESS UNIT
+
+1000	    DOPPLER
+2000	    SERVICIOS
+3000	    Laboratorio de innovacion
+4000	    INTERNO
+
+
+DEPARMENT
+
+1100	    Ventas Doppler	                
+1200	    Marketing Doppler	            
+1300	    UX Doppler	                    
+1400	    Atención al cliente	            
+1401	    Administración Doppler	        
+1601	    Mantenimiento producto Doppler	
+1602	    Mantenimiento del Site Doppler	
+1603	    I+D Doppler	                    
+1604	    Directorio Doppler	            
+2101	    Ventas Servicios	            
+2102	    Account Management	            
+2103	    Marketing Servicios	            
+2104	    Comunicaciones	                
+2201	    UX Servicios	                
+2202	    PM(Servicios)
+2203	    Desarrollo(Servicios)	
+2204	    BA (Servicios)	
+2205	    QA (Servicios)	
+2301	    Corporate Development	
+3001	    Operaciones Laboratorio	
+7777	    IT	
+8888	    Recursos Humanos	
+9999	    Finanzas	
+Interno	    Interno	
+NOAPLI2	    NO APLICA DIMENSION2 AREA	
+
+
+
+LOCATION
+
+Arg	        Argentina - General	
+CA	        USA California	
+CABA	        Argentina CABA	
+Chile	        Chile	
+Colombia	Colombia	
+Cordoba	        Argentina Córdoba	
+Ecuador	        Ecuador	
+Espana	        España	
+MDP	        Argentina MDP	
+Mexico	        México	
+NOAPLI3	        NO APLICA DIMENSION3 	LOCALIDAD
+Otros	        Otros	
+Peru	        Perú	
+Tandil	        Argentina Tandil	
+TX	        USA Texas	
+USA	        USA - General	
+
+
+
+PROJECT                                             IS PRESENT IN JIRA?
+
+17619991	AHP SHIS	                    YES
+22971968	[LNF] Framework	
+23406713	[LNA] Alacrity Phase 2	            YES
+25290772	Services	                    YES
+Add Pos	        Frogslayer - Add Pos	            YES
+AgSource	VAS AgSource	                    YES
+AHP_Care	AHP - Care26 website	
+AHP_SHIS	AHP SHIS	
+Aries	        Frogslayer - Aries	            YES
+BOT	        Directly - BOT	                    YES
+Cosmolex	Cosmolex	                    YES
+DC Lite	        VAS DC Lite	                    YES
+Deitress	Deitress/Citymesh	
+DEPARTAM	DEPARTAMENTO	                    ? Development Department Activities ?
+Feedwach	VAS Feedwach	                    YES
+LN_Alacr	LexisNexis / Alacrity	
+LN_Frame	LexisNexis / Framework	
+LNJersey	Lexis Nexis / New Jersey PD	
+Morpheus	VAS Morpheus	                    YES
+NOAPLI4	        NO APLICA DIMENSION4 PROYECTOS
+Opya	        Opya	                            YES 
+P202/BGC	P202 /BGC	
+PCC	        VAS PCC	                            YES
+PEC_Womb	PEC Safety / The Wombats	
+RW/BNC	        Rocket Wagon / BNC	            YES
+RW/Etude	Rocket Wagon/Etude pay	
+URUS	        VAS URUS	                    YES
+
+
+
+MISSING:
+    DIGITAL BLUE
+    DIGITAL TRANSFORMATION
+    PANASONIC POC
+    DOPPLER
+    MS OPERATION
+    MS QUANT
+    LABS
+    QUALITY DEPARMENT ACTIVITIES
+    SALES & MKT DEPARMENT
+    SAP B1 USA
+    PM DEPARTMENT ACTIVITIES
+    UXBA DEPARMENT ACTIVITIES
+    MINDED
+    SVLA.VC
+    SHOP YOUR WAY MAX
+    DAIRY COMP
+    ILOOP & CURTIS
