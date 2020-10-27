@@ -12,14 +12,14 @@ import java.util.List;
  */
 public class Purchase {
 
-    @JsonIgnore
+    @JsonProperty("DocEntry")
     private int docEntry;
 
     @JsonProperty("DocumentLines")
     private List<DocumentLines> documentLines;
 
-    @JsonProperty("RequriedDate")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonProperty("RequriedDate")
     private Date requriedDate;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")

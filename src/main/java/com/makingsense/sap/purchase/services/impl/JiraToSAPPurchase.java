@@ -97,8 +97,7 @@ public class JiraToSAPPurchase implements MigrateToSAP<Purchase, JiraPurchaseTic
                 .setDocDate(new Date())
                 .setJiraTicketId(ticket.getTicketId())
                 .setCreatorEmail(ticket.getCreator())
-                // TODO: This will be added once is present in SAP.
-                //.setCreatorName(ticket.getCreatorDisplayName())
+                .setCreatorName(ticket.getCreatorDisplayName())
                 .build();
 
         LOGGER.debug("The purchase to save is: [{}].", purchase);

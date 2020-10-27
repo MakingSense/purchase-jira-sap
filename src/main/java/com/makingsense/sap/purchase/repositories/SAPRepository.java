@@ -57,7 +57,7 @@ public class SAPRepository {
     @Value("${sap.purchase.login.path:Login}")
     private String loginPath;
 
-    @Value("${sap.purchase.request.path:PurchaseRequestsAlgo}")
+    @Value("${sap.purchase.request.path:PurchaseRequests}")
     private String purchaseRequestPath;
 
     static {

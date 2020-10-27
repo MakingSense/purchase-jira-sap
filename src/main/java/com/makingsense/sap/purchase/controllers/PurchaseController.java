@@ -36,8 +36,8 @@ public class PurchaseController {
     @Autowired
     public PurchaseController(final JiraToSAPPurchase service, final ObjectMapper mapper) {
         this.migrationService = service;
-        this.mapper = mapper;
 
+        this.mapper = mapper.copy();
         final SimpleModule module = new SimpleModule();
         module.addSerializer(Purchase.class, new PurchaseSerializer());
 
@@ -45,12 +45,14 @@ public class PurchaseController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity migrateJiraTicket(@Valid @RequestBody final JiraPurchaseTicket ticket) {
+    public ResponseEntity migrateJiraTicket(@Valid @RequestBody final JiraPurchaseTicket ticket) throws Exception {
         LOGGER.info("A new Jira ticket needs to be migrated: {}.", ticket);
 
         final Purchase createdPurchase = migrationService.migrate(ticket);
 
-        return new ResponseEntity(createdPurchase, HttpStatus.CREATED);
+        final String response = mapper.writeValueAsString(createdPurchase);
+
+        return new ResponseEntity(response, HttpStatus.CREATED);
     }
 
 }
