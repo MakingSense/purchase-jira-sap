@@ -1,7 +1,10 @@
 package com.makingsense.sap.purchase.controllers;
 
+import com.makingsense.sap.purchase.errors.InvalidCredentialsException;
+import com.makingsense.sap.purchase.errors.SAPBadRequestException;
 import com.makingsense.sap.purchase.models.ErrorCodes;
 import com.makingsense.sap.purchase.models.SAPPurchaseError;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -20,9 +23,26 @@ public class ControllerErrorHandler {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(ControllerErrorHandler.class);
 
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<SAPPurchaseError> handleUnauthorizedException(final InvalidCredentialsException ex) {
+        LOGGER.error("There was a problem when generating the session with SAP. Exception = [{}].", ex);
+
+        final SAPPurchaseError error = new SAPPurchaseError(ErrorCodes.SAP_UNAUTHORIZED_REQUEST);
+
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(SAPBadRequestException.class)
+    public ResponseEntity<SAPPurchaseError> handleBadRequests(final SAPBadRequestException ex) {
+        LOGGER.error("There was a problem in the request made to SAP. Exception = [{}].", ex);
+
+        final SAPPurchaseError error = new SAPPurchaseError(ErrorCodes.SAP_BAD_REQUEST_REQUEST);
+
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<SAPPurchaseError> handleBadRequestsException(
-            MethodArgumentNotValidException ex) {
+    public ResponseEntity<SAPPurchaseError> handleBadRequestsException(final MethodArgumentNotValidException ex) {
 
         final String firstErrorMessage = ex.getBindingResult()
                 .getAllErrors()
@@ -39,7 +59,7 @@ public class ControllerErrorHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public final ResponseEntity<SAPPurchaseError> handleGeneralException(Exception ex) {
+    public final ResponseEntity<SAPPurchaseError> handleGeneralException(final Exception ex) {
         LOGGER.error("An error occurred while processing the request. Exception = [{}]", ex.getMessage());
 
         final SAPPurchaseError smError = new SAPPurchaseError(ErrorCodes.INTERNAL_SERVER_ERROR);

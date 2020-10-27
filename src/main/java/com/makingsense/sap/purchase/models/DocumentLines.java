@@ -101,7 +101,7 @@ public class DocumentLines {
         }
 
         public DocumentLinesBuilder setBusinessUnit(final String businessUnit) {
-            this.costingCode = costingCode;
+            this.costingCode = businessUnit;
             return this;
         }
 

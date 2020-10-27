@@ -13,10 +13,13 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import io.github.resilience4j.retry.Retry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -34,6 +37,12 @@ public class SAPRepository {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SAPRepository.class);
 
+    private static final String SESSION_ATTRIBUTE = "B1SESSION";
+
+    private static final String ROUTE_ATTRIBUTE = "ROUTEID";
+
+    private static final String SESSION_DELIMITER = ";";
+
     private final RestTemplate restTemplate;
 
     @Value("${sap.purchase.db}")
@@ -48,15 +57,21 @@ public class SAPRepository {
     @Value("${sap.purchase.login.path:Login}")
     private String loginPath;
 
-    @Value("${sap.purchase.request.path:PurchaseRequests}")
+    @Value("${sap.purchase.request.path:PurchaseRequestsAlgo}")
     private String purchaseRequestPath;
 
     static {
         disableSslVerification();
     }
 
-    public SAPRepository(final RestTemplate restTemplate) {
+    private Function<HttpEntity, ResponseEntity> decorated;
+
+    @Autowired
+    public SAPRepository(final RestTemplate restTemplate,
+                         final Retry sapRetry) {
         this.restTemplate = restTemplate;
+
+        decorated = Retry.decorateFunction(sapRetry, (HttpEntity entity) -> this.executeWithRetry(entity));
     }
 
     /**
@@ -64,15 +79,16 @@ public class SAPRepository {
      *
      * @return  a {@link ResponseEntity} that contains the session information to be used later on.
      */
+
     private ResponseEntity<String> login() {
         final SAPLogin login = new SAPLogin(companyDb, userName, password);
 
         final HttpEntity<SAPLogin> entity = new HttpEntity<>(login);
 
         final ResponseEntity<String> response = restTemplate.exchange(loginPath,
-                HttpMethod.POST,
-                entity,
-                String.class);
+                    HttpMethod.POST,
+                    entity,
+                    String.class);
 
         LOGGER.debug("Login was success. New session was generated.");
 
@@ -88,14 +104,18 @@ public class SAPRepository {
 
         final HttpEntity entity = new HttpEntity(ticket, sessionHeader);
 
-        final ResponseEntity<Purchase> response = restTemplate.exchange(purchaseRequestPath,
-                HttpMethod.POST,
-                entity,
-                Purchase.class);
+        final ResponseEntity<Purchase> response = decorated.apply(entity);
 
-        LOGGER.info("The purchase was created successfully: {}.", response.getBody());
+        LOGGER.info("A new purchase was created in SAP. Purchase = [{}].", response);
 
         return response.getBody();
+    }
+
+    private ResponseEntity<Purchase> executeWithRetry(final HttpEntity entity) {
+        final ResponseEntity<Purchase> response =
+                restTemplate.exchange(purchaseRequestPath, HttpMethod.POST, entity, Purchase.class);
+
+        return response;
     }
 
     /**
@@ -107,9 +127,9 @@ public class SAPRepository {
     private MultiValueMap<String, String> createSessionHeader(final HttpHeaders headers) {
         final List<String> sessionInfo = headers.get(HttpHeaders.SET_COOKIE);
         final String sessionId = sessionInfo.stream()
-                .map(s -> s.split(";")[0])
-                .filter(s -> s.contains("B1SESSION") || s.contains("ROUTEID"))
-                .collect(Collectors.joining(";"));
+                .map(s -> s.split(SESSION_DELIMITER)[0])
+                .filter(s -> s.contains(SESSION_ATTRIBUTE) || s.contains(ROUTE_ATTRIBUTE))
+                .collect(Collectors.joining(SESSION_DELIMITER));
 
         final MultiValueMap<String, String> cookieHeader = new HttpHeaders() {{
             add(HttpHeaders.COOKIE, sessionId);

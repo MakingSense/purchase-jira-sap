@@ -1,9 +1,10 @@
 package com.makingsense.sap.purchase.controllers;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.makingsense.sap.purchase.models.JiraPurchaseTicket;
 import com.makingsense.sap.purchase.models.Purchase;
+import com.makingsense.sap.purchase.serializers.PurchaseSerializer;
 import com.makingsense.sap.purchase.services.MigrateToSAP;
 import com.makingsense.sap.purchase.services.impl.JiraToSAPPurchase;
 import org.slf4j.Logger;
@@ -36,15 +37,20 @@ public class PurchaseController {
     public PurchaseController(final JiraToSAPPurchase service, final ObjectMapper mapper) {
         this.migrationService = service;
         this.mapper = mapper;
+
+        final SimpleModule module = new SimpleModule();
+        module.addSerializer(Purchase.class, new PurchaseSerializer());
+
+        this.mapper.registerModule(module);
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity migrateJiraTicket(@Valid @RequestBody final JiraPurchaseTicket ticket) {
         LOGGER.info("A new Jira ticket needs to be migrated: {}.", ticket);
+
         final Purchase createdPurchase = migrationService.migrate(ticket);
 
         return new ResponseEntity(createdPurchase, HttpStatus.CREATED);
     }
-
 
 }

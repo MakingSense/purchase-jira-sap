@@ -1,7 +1,6 @@
 package com.makingsense.sap.purchase.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -41,6 +40,9 @@ public class JiraPurchaseTicket {
 
     @NotBlank(message = "The ticket creator is mandatory.")
     private String creator;
+
+    @NotBlank(message = "The ticket creator display name is mandatory.")
+    private String creatorDisplayName;
 
     @NotBlank(message = "The ticket description is mandatory.")
     private String description;
@@ -87,6 +89,10 @@ public class JiraPurchaseTicket {
         return creator;
     }
 
+    public String getCreatorDisplayName() {
+        return creatorDisplayName;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -103,6 +109,7 @@ public class JiraPurchaseTicket {
                 ", dateOfPayment=" + dateOfPayment +
                 ", ticketId='" + ticketId + '\'' +
                 ", creator='" + creator + '\'' +
+                ", creatorDisplayName='" + creatorDisplayName + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

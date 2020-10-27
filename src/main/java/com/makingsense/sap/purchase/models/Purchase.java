@@ -1,6 +1,7 @@
 package com.makingsense.sap.purchase.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
@@ -11,7 +12,7 @@ import java.util.List;
  */
 public class Purchase {
 
-    @JsonProperty("DocEntry")
+    @JsonIgnore
     private int docEntry;
 
     @JsonProperty("DocumentLines")
@@ -31,6 +32,9 @@ public class Purchase {
     @JsonProperty("U_Creator")
     private String creatorEmail;
 
+    @JsonProperty("U_CreatorName")
+    private String creatorDisplayName;
+
     /**
      * Default constructor used by jackson.
      *
@@ -45,12 +49,14 @@ public class Purchase {
                     final Date docDate,
                     final String jiraId,
                     final String creatorEmail,
+                    final String creatorDisplayName,
                     final int docEntry) {
         this.documentLines = documentLines;
         this.requriedDate = requiredDate;
         this.docDate = docDate;
         this.jiraId = jiraId;
         this.creatorEmail = creatorEmail;
+        this.creatorDisplayName = creatorDisplayName;
         this.docEntry = docEntry;
     }
 
@@ -65,10 +71,15 @@ public class Purchase {
         this.docDate = builder.docDate;
         this.jiraId = builder.jiraId;
         this.creatorEmail = builder.creatorEmail;
+        this.creatorDisplayName = builder.creatorDisplayName;
     }
 
     public int getDocEntry() {
         return docEntry;
+    }
+
+    public String getJiraId() {
+        return jiraId;
     }
 
     @Override
@@ -80,6 +91,7 @@ public class Purchase {
                 ", docDate=" + docDate +
                 ", jiraId='" + jiraId + '\'' +
                 ", creatorEmail='" + creatorEmail + '\'' +
+                ", creatorName='" + creatorDisplayName + '\'' +
                 '}';
     }
 
@@ -97,6 +109,8 @@ public class Purchase {
         private String jiraId;
 
         private String creatorEmail;
+
+        private String creatorDisplayName;
 
         public PurchaseBuilder withDocument(final List<DocumentLines> documentLines) {
             this.documentLines = documentLines;
@@ -120,6 +134,11 @@ public class Purchase {
 
         public PurchaseBuilder setCreatorEmail(final String email) {
             this.creatorEmail = email;
+            return this;
+        }
+
+        public PurchaseBuilder setCreatorName(final String creatorDisplayName) {
+            this.creatorDisplayName = creatorDisplayName;
             return this;
         }
 
