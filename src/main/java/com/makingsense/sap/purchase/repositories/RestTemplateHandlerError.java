@@ -34,7 +34,14 @@ public class RestTemplateHandlerError extends DefaultResponseErrorHandler {
     @Override
     public void handleError(final ClientHttpResponse clientHttpResponse) throws IOException {
         final HttpStatus statusCode = clientHttpResponse.getStatusCode();
-        final String errorMessage = mapper.readValue(clientHttpResponse.getBody(), Map.class).toString();
+        String errorMessage = "";
+
+        try {
+            mapper.readValue(clientHttpResponse.getBody(), Map.class).toString();
+        } catch (final Exception ex) {
+            LOGGER.error("An error occurred when trying to get the response body.",
+                    ex);
+        }
 
         if (statusCode.series() == HttpStatus.Series.SERVER_ERROR) {
             LOGGER.error("SAP service responded with an internal error. Error = [{}].",
@@ -46,11 +53,9 @@ public class RestTemplateHandlerError extends DefaultResponseErrorHandler {
 
     }
 
-    private void handleClientErrors(final HttpStatus statusCode ,
-                                    final String errorMessage) throws IOException {
+    private void handleClientErrors(final HttpStatus statusCode, final String errorMessage) {
         if (statusCode == HttpStatus.UNAUTHORIZED) {
-            LOGGER.error("There was an issue when authenticating to SAP services. Error = [{}].",
-                    errorMessage);
+            LOGGER.error("There was an issue when authenticating to SAP services.");
             throw new InvalidCredentialsException("The credentials provided are invalid.");
         } else {
             LOGGER.error("The request to SAP is malformed. Error = [{}].", errorMessage);

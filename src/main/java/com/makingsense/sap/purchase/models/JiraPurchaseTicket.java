@@ -13,7 +13,10 @@ import java.util.Date;
 public class JiraPurchaseTicket {
 
     @Min(value = 1, message = "The quantity of items must be at least 1.")
-    private int quantity;
+    private float quantity;
+
+    @NotBlank(message = "The company is mandatory.")
+    private String company;
 
     @NotBlank(message = "The business unit is mandatory.")
     private String businessUnit;
@@ -41,6 +44,9 @@ public class JiraPurchaseTicket {
     @NotBlank(message = "The ticket creator is mandatory.")
     private String creator;
 
+    @NotBlank(message = "The creator email is mandatory")
+    private String email;
+
     @NotBlank(message = "The ticket creator display name is mandatory.")
     private String creatorDisplayName;
 
@@ -53,8 +59,12 @@ public class JiraPurchaseTicket {
     public JiraPurchaseTicket() {
     }
 
-    public int getQuantity() {
+    public float getQuantity() {
         return quantity;
+    }
+
+    public String getCompany() {
+        return company;
     }
 
     public String getBusinessUnit() {
@@ -89,6 +99,10 @@ public class JiraPurchaseTicket {
         return creator;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public String getCreatorDisplayName() {
         return creatorDisplayName;
     }
@@ -101,6 +115,7 @@ public class JiraPurchaseTicket {
     public String toString() {
         return "JiraPurchaseTicket {" +
                 "quantity=" + quantity +
+                ", company='" + company + '\'' +
                 ", businessUnit='" + businessUnit + '\'' +
                 ", department='" + department + '\'' +
                 ", location='" + location + '\'' +
@@ -109,6 +124,7 @@ public class JiraPurchaseTicket {
                 ", dateOfPayment=" + dateOfPayment +
                 ", ticketId='" + ticketId + '\'' +
                 ", creator='" + creator + '\'' +
+                ", email='" + email + '\'' +
                 ", creatorDisplayName='" + creatorDisplayName + '\'' +
                 ", description='" + description + '\'' +
                 '}';

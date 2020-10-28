@@ -5,15 +5,16 @@ import com.makingsense.sap.purchase.models.JiraPurchaseTicket;
 import com.makingsense.sap.purchase.models.Purchase;
 import com.makingsense.sap.purchase.repositories.SAPRepository;
 import com.makingsense.sap.purchase.services.MigrateToSAP;
+
+import java.util.Collections;
+import java.util.Date;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import java.util.Collections;
-import java.util.Date;
-import java.util.Map;
 
 /**
  * The main responsibility is to communicate with SAP service to create a new purchase
@@ -24,7 +25,7 @@ public class JiraToSAPPurchase implements MigrateToSAP<Purchase, JiraPurchaseTic
 
     private final static Logger LOGGER = LoggerFactory.getLogger(JiraPurchaseTicket.class);
 
-    private final SAPRepository sapRepository;
+    private final SAPRepository sapRepositoryImpl;
 
     @Value("#{${sap.purchase.mapping.business.unit}}")
     private Map<String, String> businessUnitMap;
@@ -45,8 +46,8 @@ public class JiraToSAPPurchase implements MigrateToSAP<Purchase, JiraPurchaseTic
     private String itemCode;
 
     @Autowired
-    public JiraToSAPPurchase(final SAPRepository sapRepository) {
-        this.sapRepository = sapRepository;
+    public JiraToSAPPurchase(final SAPRepository sapRepositoryImpl) {
+        this.sapRepositoryImpl = sapRepositoryImpl;
     }
 
     /**
@@ -59,7 +60,7 @@ public class JiraToSAPPurchase implements MigrateToSAP<Purchase, JiraPurchaseTic
     public Purchase migrate(final JiraPurchaseTicket ticket) {
         final Purchase purchase = createPurchase(ticket);
 
-        return sapRepository.createPurchase(purchase);
+        return sapRepositoryImpl.createPurchase(purchase);
     }
 
     /**
@@ -98,6 +99,7 @@ public class JiraToSAPPurchase implements MigrateToSAP<Purchase, JiraPurchaseTic
                 .setJiraTicketId(ticket.getTicketId())
                 .setCreatorEmail(ticket.getCreator())
                 .setCreatorName(ticket.getCreatorDisplayName())
+                .setCompany(ticket.getCompany())
                 .build();
 
         LOGGER.debug("The purchase to save is: [{}].", purchase);

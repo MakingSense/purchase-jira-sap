@@ -35,6 +35,9 @@ public class Purchase {
     @JsonProperty("U_CreatorName")
     private String creatorDisplayName;
 
+    @JsonIgnore
+    private String company;
+
     /**
      * Default constructor used by jackson.
      *
@@ -72,6 +75,7 @@ public class Purchase {
         this.jiraId = builder.jiraId;
         this.creatorEmail = builder.creatorEmail;
         this.creatorDisplayName = builder.creatorDisplayName;
+        this.company = builder.company;
     }
 
     public int getDocEntry() {
@@ -80,6 +84,10 @@ public class Purchase {
 
     public String getJiraId() {
         return jiraId;
+    }
+
+    public String getCompany() {
+        return company;
     }
 
     @Override
@@ -112,6 +120,8 @@ public class Purchase {
 
         private String creatorDisplayName;
 
+        private String company;
+
         public PurchaseBuilder withDocument(final List<DocumentLines> documentLines) {
             this.documentLines = documentLines;
             return this;
@@ -139,6 +149,11 @@ public class Purchase {
 
         public PurchaseBuilder setCreatorName(final String creatorDisplayName) {
             this.creatorDisplayName = creatorDisplayName;
+            return this;
+        }
+
+        public PurchaseBuilder setCompany(final String company) {
+            this.company = company;
             return this;
         }
 

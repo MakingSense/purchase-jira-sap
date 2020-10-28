@@ -1,6 +1,7 @@
 package com.makingsense.sap.purchase.configuration;
 
 import com.makingsense.sap.purchase.errors.InvalidCredentialsException;
+import com.makingsense.sap.purchase.errors.InvalidSAPDBException;
 import com.makingsense.sap.purchase.errors.SAPBadRequestException;
 import com.makingsense.sap.purchase.errors.SAPInternalServerException;
 import com.makingsense.sap.purchase.repositories.RestTemplateHandlerError;
@@ -80,7 +81,7 @@ public class RestTemplateConfiguration {
                         SAPBadRequestException.class,
                         TimeoutException.class,
                         Exception.class)
-                .ignoreExceptions(InvalidCredentialsException.class)
+                .ignoreExceptions(InvalidCredentialsException.class, InvalidSAPDBException.class)
                 .intervalFunction(intervalFn)
                 .build();
 

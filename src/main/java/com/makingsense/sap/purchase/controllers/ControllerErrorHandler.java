@@ -1,6 +1,7 @@
 package com.makingsense.sap.purchase.controllers;
 
 import com.makingsense.sap.purchase.errors.InvalidCredentialsException;
+import com.makingsense.sap.purchase.errors.InvalidSAPDBException;
 import com.makingsense.sap.purchase.errors.SAPBadRequestException;
 import com.makingsense.sap.purchase.models.ErrorCodes;
 import com.makingsense.sap.purchase.models.SAPPurchaseError;
@@ -56,6 +57,15 @@ public class ControllerErrorHandler {
         final SAPPurchaseError error = new SAPPurchaseError(ErrorCodes.BAD_REQUEST, firstErrorMessage);
 
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidSAPDBException.class)
+    public ResponseEntity<SAPPurchaseError> handleInvalidDBException(final InvalidSAPDBException ex) {
+        LOGGER.error("There was a problem when getting SAP DB information. Exception = [{}].", ex);
+
+        final SAPPurchaseError error = new SAPPurchaseError(ErrorCodes.SAP_INVALID_DB);
+
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(Exception.class)

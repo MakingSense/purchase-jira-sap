@@ -12,7 +12,8 @@ public enum ErrorCodes {
     // 5xx Family error codes
     INTERNAL_SERVER_ERROR(50001, "The application run into un unknown problem. Please contact support."),
     SAP_UNAUTHORIZED_REQUEST(50002, "The application was not authorized to communicate with SAP."),
-    SAP_BAD_REQUEST_REQUEST(50003, "The application request is malformed.");
+    SAP_BAD_REQUEST_REQUEST(50003, "The application request is malformed."),
+    SAP_INVALID_DB(50004, "The company name is invalid.");
 
     private final int code;
 

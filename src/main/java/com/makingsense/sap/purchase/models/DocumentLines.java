@@ -95,8 +95,8 @@ public class DocumentLines {
             return this;
         }
 
-        public DocumentLinesBuilder setQuantity(final int quantity) {
-            this.quantity = quantity;
+        public DocumentLinesBuilder setQuantity(final float quantity) {
+            this.quantity = (int) quantity;
             return this;
         }
 
