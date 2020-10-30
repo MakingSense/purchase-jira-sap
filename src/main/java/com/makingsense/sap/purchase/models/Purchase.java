@@ -3,9 +3,11 @@ package com.makingsense.sap.purchase.models;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Strings;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Entity that represents a {@link Purchase} on SAP.
@@ -103,6 +105,35 @@ public class Purchase {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other != null && this.getClass() == other.getClass()) {
+            final Purchase purchase = (Purchase) other;
+            return docEntry == purchase.docEntry &&
+                    Objects.equals(documentLines, purchase.documentLines) &&
+                    Objects.equals(requriedDate, purchase.requriedDate) &&
+                    Objects.equals(docDate, purchase.docDate) &&
+                    Objects.equals(jiraId, purchase.jiraId) &&
+                    Objects.equals(creatorEmail, purchase.creatorEmail) &&
+                    Objects.equals(company, purchase.company);
+        }
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(docEntry,
+                documentLines,
+                requriedDate,
+                docDate,
+                jiraId,
+                creatorEmail,
+                company);
+    }
+
     /**
      * Builder class to create new {@link Purchase} objects in a fluent manner.
      */
@@ -158,6 +189,14 @@ public class Purchase {
         }
 
         public Purchase build() {
+            if (documentLines == null
+                    || requriedDate == null
+                    || docDate == null
+                    || Strings.isNullOrEmpty(jiraId)
+                    || Strings.isNullOrEmpty(creatorEmail)
+                    || Strings.isNullOrEmpty(company)) {
+                throw new IllegalArgumentException("Purchase mandatory fields were not present.");
+            }
             return new Purchase(this);
         }
     }

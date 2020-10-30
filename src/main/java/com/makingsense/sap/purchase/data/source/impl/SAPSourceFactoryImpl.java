@@ -35,7 +35,7 @@ public class SAPSourceFactoryImpl implements SAPSourceFactory {
     public SAPSource getSource(final String company) {
         final Optional<String> source = sapSources.keySet()
                 .stream()
-                .filter(key -> key.contains(company.toLowerCase()))
+                .filter(key -> company.toLowerCase().contains(key))
                 .findFirst();
 
         if (!source.isPresent()) {

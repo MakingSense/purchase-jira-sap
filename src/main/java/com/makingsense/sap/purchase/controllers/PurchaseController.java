@@ -7,6 +7,9 @@ import com.makingsense.sap.purchase.models.Purchase;
 import com.makingsense.sap.purchase.serializers.PurchaseSerializer;
 import com.makingsense.sap.purchase.services.MigrateToSAP;
 import com.makingsense.sap.purchase.services.impl.JiraToSAPPurchase;
+
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-
 /**
  * REST API that expose a resource to handle a JIRA ticket.
  */
@@ -29,13 +30,13 @@ public class PurchaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PurchaseController.class);
 
-    private final MigrateToSAP<Purchase,JiraPurchaseTicket> migrationService;
+    private final MigrateToSAP<Purchase, JiraPurchaseTicket> jiraToSAPPurchase;
 
     private final ObjectMapper mapper;
 
     @Autowired
-    public PurchaseController(final JiraToSAPPurchase service, final ObjectMapper mapper) {
-        this.migrationService = service;
+    public PurchaseController(final MigrateToSAP jiraToSAPPurchase, final ObjectMapper mapper) {
+        this.jiraToSAPPurchase = jiraToSAPPurchase;
 
         this.mapper = mapper.copy();
         final SimpleModule module = new SimpleModule();
@@ -48,7 +49,7 @@ public class PurchaseController {
     public ResponseEntity migrateJiraTicket(@Valid @RequestBody final JiraPurchaseTicket ticket) throws Exception {
         LOGGER.info("A new Jira ticket needs to be migrated: {}.", ticket);
 
-        final Purchase createdPurchase = migrationService.migrate(ticket);
+        final Purchase createdPurchase = jiraToSAPPurchase.migrate(ticket);
 
         final String response = mapper.writeValueAsString(createdPurchase);
 

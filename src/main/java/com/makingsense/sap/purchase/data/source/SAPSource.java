@@ -2,6 +2,8 @@ package com.makingsense.sap.purchase.data.source;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Objects;
+
 /**
  * Entity that represents the information needed to communicate with SAP, such as the DB to be used,
  * the user and the password.
@@ -39,5 +41,25 @@ public class SAPSource {
 
     public void setPassword(final String password) {
         this.password = password;
+    }
+
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other != null && other.getClass() == this.getClass()) {
+            final SAPSource sapSource = (SAPSource) other;
+            return Objects.equals(db, sapSource.db) &&
+                    Objects.equals(user, sapSource.user) &&
+                    Objects.equals(password, sapSource.password);
+        }
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(db, user, password);
     }
 }

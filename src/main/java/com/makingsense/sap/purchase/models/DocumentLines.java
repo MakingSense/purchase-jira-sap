@@ -1,6 +1,10 @@
 package com.makingsense.sap.purchase.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Strings;
+
+import java.util.Objects;
+import java.util.function.Consumer;
 
 /**
  * Represents the information of a purchase in SAP.
@@ -62,6 +66,35 @@ public class DocumentLines {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other != null && this.getClass() == other.getClass()) {
+            final DocumentLines that = (DocumentLines) other;
+            return  quantity == that.quantity &&
+                    Objects.equals(itemCode, that.itemCode) &&
+                    Objects.equals(itemDescription, that.itemDescription) &&
+                    Objects.equals(costingCode, that.costingCode) &&
+                    Objects.equals(costingCode2, that.costingCode2) &&
+                    Objects.equals(costingCode3, that.costingCode3) &&
+                    Objects.equals(costingCode4, that.costingCode4);
+        }
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(quantity,
+                itemCode,
+                itemDescription,
+                costingCode,
+                costingCode2,
+                costingCode3,
+                costingCode4);
+    }
+
     public static class DocumentLinesBuilder {
 
         private int lineNum;
@@ -92,6 +125,7 @@ public class DocumentLines {
 
         public DocumentLinesBuilder setItemDescription(final String itemDescription) {
             this.itemDescription = itemDescription;
+
             return this;
         }
 
@@ -105,8 +139,8 @@ public class DocumentLines {
             return this;
         }
 
-        public DocumentLinesBuilder setDeparment(final String deparment) {
-            this.costingCode2 = deparment;
+        public DocumentLinesBuilder setDepartment(final String department) {
+            this.costingCode2 = department;
             return this;
         }
 
@@ -121,6 +155,15 @@ public class DocumentLines {
         }
 
         public DocumentLines build() {
+            if (Strings.isNullOrEmpty(itemCode)
+                    || Strings.isNullOrEmpty(itemDescription)
+                    || quantity <= 0
+                    || Strings.isNullOrEmpty(costingCode)
+                    || Strings.isNullOrEmpty(costingCode2)
+                    || Strings.isNullOrEmpty(costingCode3)
+                    || Strings.isNullOrEmpty(costingCode4)) {
+                throw new IllegalArgumentException("Not all mandatory fields were provided.");
+            }
             return new DocumentLines(this);
         }
     }

@@ -1,7 +1,9 @@
 package com.makingsense.sap.purchase.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -45,6 +47,7 @@ public class JiraPurchaseTicket {
     private String creator;
 
     @NotBlank(message = "The creator email is mandatory")
+    @Email(message = "The creator email is invalid")
     private String email;
 
     @NotBlank(message = "The ticket creator display name is mandatory.")

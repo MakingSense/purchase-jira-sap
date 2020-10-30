@@ -1,9 +1,8 @@
-package com.makingsense.sap.purchase.repositories.impl;
+package com.makingsense.sap.purchase.repositories;
 
 import com.makingsense.sap.purchase.data.source.SAPSourceFactory;
 import com.makingsense.sap.purchase.models.Purchase;
 import com.makingsense.sap.purchase.data.source.SAPSource;
-import com.makingsense.sap.purchase.repositories.SAPRepository;
 
 import io.github.resilience4j.retry.Retry;
 
@@ -103,6 +102,7 @@ public class SAPRepositoryImpl implements SAPRepository {
         final HttpEntity entity = new HttpEntity(ticket, sessionHeader);
 
         final ResponseEntity<Purchase> response = decorated.apply(entity);
+
 
         LOGGER.info("A new purchase was created in SAP. Purchase = [{}].", response);
 

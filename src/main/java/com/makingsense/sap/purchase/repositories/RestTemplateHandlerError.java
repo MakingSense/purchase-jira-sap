@@ -37,7 +37,7 @@ public class RestTemplateHandlerError extends DefaultResponseErrorHandler {
         String errorMessage = "";
 
         try {
-            mapper.readValue(clientHttpResponse.getBody(), Map.class).toString();
+            errorMessage = mapper.readValue(clientHttpResponse.getBody(), Map.class).toString();
         } catch (final Exception ex) {
             LOGGER.error("An error occurred when trying to get the response body.",
                     ex);
