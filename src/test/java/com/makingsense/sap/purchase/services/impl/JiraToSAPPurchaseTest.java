@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
@@ -99,7 +100,7 @@ public class JiraToSAPPurchaseTest {
         when(ticket.getCompany()).thenReturn("Company");
         when(ticket.getCreator()).thenReturn(accountId);
         when(ticket.getCreatorDisplayName()).thenReturn("John Doe");
-        when(ticket.getDateOfPayment()).thenReturn(new Date());
+        when(ticket.getDateOfPayment()).thenReturn(LocalDate.now());
         when(ticket.getDepartment()).thenReturn(DEPARTMENT_KEY);
         when(ticket.getProject()).thenReturn(PROJECT_KEY);
         when(ticket.getQuantity()).thenReturn(23f);

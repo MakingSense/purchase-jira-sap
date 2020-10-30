@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Strings;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -22,11 +23,11 @@ public class Purchase {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @JsonProperty("RequriedDate")
-    private Date requriedDate;
+    private LocalDate requriedDate;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @JsonProperty("DocDate")
-    private Date docDate;
+    private LocalDate docDate;
 
     @JsonProperty("U_ID_JIRA")
     private String jiraId;
@@ -50,8 +51,8 @@ public class Purchase {
      * @param creatorEmail      the email that created the Jira ticket
      */
     public Purchase(final List<DocumentLines> documentLines,
-                    final Date requiredDate,
-                    final Date docDate,
+                    final LocalDate requiredDate,
+                    final LocalDate docDate,
                     final String jiraId,
                     final String creatorEmail,
                     final String creatorDisplayName,
@@ -141,9 +142,9 @@ public class Purchase {
 
         private List<DocumentLines> documentLines;
 
-        private Date requriedDate;
+        private LocalDate requriedDate;
 
-        private Date docDate;
+        private LocalDate docDate;
 
         private String jiraId;
 
@@ -158,12 +159,12 @@ public class Purchase {
             return this;
         }
 
-        public PurchaseBuilder setRequriedDate(final Date requriedDate) {
+        public PurchaseBuilder setRequriedDate(final LocalDate requriedDate) {
             this.requriedDate = requriedDate;
             return this;
         }
 
-        public PurchaseBuilder setDocDate(final Date docDate) {
+        public PurchaseBuilder setDocDate(final LocalDate docDate) {
             this.docDate = docDate;
             return this;
         }

@@ -7,6 +7,7 @@ import com.makingsense.sap.purchase.models.Purchase;
 import com.makingsense.sap.purchase.repositories.SAPRepository;
 import com.makingsense.sap.purchase.services.MigrateToSAP;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
@@ -94,7 +95,7 @@ public class JiraToSAPPurchase implements MigrateToSAP<Purchase, JiraPurchaseTic
         final Purchase purchase = new Purchase.PurchaseBuilder()
                 .withDocument(Collections.singletonList(document))
                 .setRequriedDate(ticket.getDateOfPayment())
-                .setDocDate(new Date())
+                .setDocDate(LocalDate.now())
                 .setJiraTicketId(ticket.getTicketId())
                 .setCreatorEmail(ticket.getCreator())
                 .setCreatorName(ticket.getCreatorDisplayName())

@@ -7,7 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Represents the information of a purchased stored in Jira as a ticket.
@@ -34,11 +34,11 @@ public class JiraPurchaseTicket {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @NotNull(message = "The ticket creation date is mandatory.")
-    private Date creationDate;
+    private LocalDate creationDate;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @NotNull(message = "The date of payment is mandatory.")
-    private Date dateOfPayment;
+    private LocalDate dateOfPayment;
 
     @NotBlank(message = "The Jira ticket id is mandatory.")
     private String ticketId;
@@ -86,11 +86,11 @@ public class JiraPurchaseTicket {
         return project;
     }
 
-    public Date getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public Date getDateOfPayment() {
+    public LocalDate getDateOfPayment() {
         return dateOfPayment;
     }
 

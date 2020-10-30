@@ -7,7 +7,8 @@ package com.makingsense.sap.purchase.models;
 public enum ErrorCodes {
 
     // 4xx Family error codes
-    BAD_REQUEST(40001, "The request is malformed."),
+    GENERAL_BAD_REQUEST(40001, "The request is malformed. Please check fields values."),
+    ARGUMENT_VALIDATION_BAD_REQUEST(40002, "The request is malformed. Please check fields values."),
 
     // 5xx Family error codes
     INTERNAL_SERVER_ERROR(50001, "The application run into un unknown problem. Please contact support."),

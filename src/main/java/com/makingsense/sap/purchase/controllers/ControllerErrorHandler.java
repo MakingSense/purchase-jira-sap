@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -52,9 +53,10 @@ public class ControllerErrorHandler {
                 .get()
                 .getDefaultMessage();
 
-        LOGGER.error("There is a problem in the request. Exception = [{}]", ex.getMessage());
+        LOGGER.error("There is a problem in the request. Exception = [{}].", ex.getMessage());
 
-        final SAPPurchaseError error = new SAPPurchaseError(ErrorCodes.BAD_REQUEST, firstErrorMessage);
+        final SAPPurchaseError error = new SAPPurchaseError(ErrorCodes.ARGUMENT_VALIDATION_BAD_REQUEST,
+                 firstErrorMessage);
 
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
@@ -68,9 +70,19 @@ public class ControllerErrorHandler {
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<SAPPurchaseError> handleNotReadableException(final HttpMessageNotReadableException ex) {
+        LOGGER.error("There is a problem in the request. Check request fields. Exception = [{}].",
+                ex.getClass().getCanonicalName());
+
+        final SAPPurchaseError smError = new SAPPurchaseError(ErrorCodes.GENERAL_BAD_REQUEST);
+
+        return new ResponseEntity<>(smError, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(Exception.class)
-    public final ResponseEntity<SAPPurchaseError> handleGeneralException(final Exception ex) {
-        LOGGER.error("An error occurred while processing the request. Exception = [{}]", ex.getMessage());
+    public ResponseEntity<SAPPurchaseError> handleGeneralException(final Exception ex) {
+        LOGGER.error("An error occurred while processing the request. Exception = [{}].", ex.getClass().getCanonicalName());
 
         final SAPPurchaseError smError = new SAPPurchaseError(ErrorCodes.INTERNAL_SERVER_ERROR);
 

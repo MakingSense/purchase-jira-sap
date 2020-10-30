@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -75,7 +76,8 @@ public class ControllerErrorHandlerTest {
         when(bindingResult.getAllErrors()).thenReturn(Collections.singletonList(error));
         when(ex.getBindingResult()).thenReturn(bindingResult);
 
-        final SAPPurchaseError expected = new SAPPurchaseError(ErrorCodes.BAD_REQUEST, errorMessage);
+        final SAPPurchaseError expected = new SAPPurchaseError(ErrorCodes.ARGUMENT_VALIDATION_BAD_REQUEST,
+                errorMessage);
 
         // Act
         final ResponseEntity actual = target.handleBadRequestsException(ex);
@@ -103,7 +105,8 @@ public class ControllerErrorHandlerTest {
         when(bindingResult.getAllErrors()).thenReturn(errors);
         when(ex.getBindingResult()).thenReturn(bindingResult);
 
-        final SAPPurchaseError expected = new SAPPurchaseError(ErrorCodes.BAD_REQUEST, errorMessage);
+        final SAPPurchaseError expected = new SAPPurchaseError(ErrorCodes.ARGUMENT_VALIDATION_BAD_REQUEST,
+                errorMessage);
 
         // Act
         final ResponseEntity actual = target.handleBadRequestsException(ex);
@@ -124,6 +127,20 @@ public class ControllerErrorHandlerTest {
 
         // Assert
         assertThat(actual.getStatusCode(), is(HttpStatus.INTERNAL_SERVER_ERROR));
+        assertThat(actual.getBody(), is(expected));
+    }
+
+    @Test
+    public void shouldReturnGeneralBadRequest() {
+        // Arrange
+        final HttpMessageNotReadableException ex = mock(HttpMessageNotReadableException.class);
+        final SAPPurchaseError expected = new SAPPurchaseError(ErrorCodes.GENERAL_BAD_REQUEST);
+
+        // Act
+        final ResponseEntity actual = target.handleNotReadableException(ex);
+
+        // Assert
+        assertThat(actual.getStatusCode(), is(HttpStatus.BAD_REQUEST));
         assertThat(actual.getBody(), is(expected));
     }
 
