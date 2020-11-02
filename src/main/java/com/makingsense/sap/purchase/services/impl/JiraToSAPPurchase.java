@@ -97,7 +97,7 @@ public class JiraToSAPPurchase implements MigrateToSAP<Purchase, JiraPurchaseTic
                 .setRequriedDate(ticket.getDateOfPayment())
                 .setDocDate(LocalDate.now())
                 .setJiraTicketId(ticket.getTicketId())
-                .setCreatorEmail(ticket.getCreator())
+                .setCreatorEmail(ticket.getEmail())
                 .setCreatorName(ticket.getCreatorDisplayName())
                 .setCompany(ticket.getCompany())
                 .build();

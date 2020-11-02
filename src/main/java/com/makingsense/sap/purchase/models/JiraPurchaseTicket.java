@@ -1,7 +1,6 @@
 package com.makingsense.sap.purchase.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
