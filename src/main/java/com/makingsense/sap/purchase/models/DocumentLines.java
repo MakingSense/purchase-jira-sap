@@ -23,6 +23,9 @@ public class DocumentLines {
     @JsonProperty("Quantity")
     private int quantity;
 
+    @JsonProperty("Price")
+    private float price;
+
     @JsonProperty("CostingCode")
     private String costingCode;
 
@@ -46,6 +49,7 @@ public class DocumentLines {
         this.itemCode = builder.itemCode;
         this.itemDescription = builder.itemDescription;
         this.quantity = builder.quantity;
+        this.price = builder.price;
         this.costingCode = builder.costingCode;
         this.costingCode2 = builder.costingCode2;
         this.costingCode3 = builder.costingCode3;
@@ -59,6 +63,7 @@ public class DocumentLines {
                 ", itemCode='" + itemCode + '\'' +
                 ", itemDescription='" + itemDescription + '\'' +
                 ", quantity=" + quantity +
+                ", price=" + price +
                 ", costingCode='" + costingCode + '\'' +
                 ", costingCode2='" + costingCode2 + '\'' +
                 ", costingCode3='" + costingCode3 + '\'' +
@@ -105,6 +110,8 @@ public class DocumentLines {
 
         private int quantity;
 
+        private float price;
+
         private String costingCode;
 
         private String costingCode2;
@@ -134,6 +141,11 @@ public class DocumentLines {
             return this;
         }
 
+        public DocumentLinesBuilder setPrice(final float price) {
+            this.price = price;
+            return this;
+        }
+
         public DocumentLinesBuilder setBusinessUnit(final String businessUnit) {
             this.costingCode = businessUnit;
             return this;
@@ -158,6 +170,7 @@ public class DocumentLines {
             if (Strings.isNullOrEmpty(itemCode)
                     || Strings.isNullOrEmpty(itemDescription)
                     || quantity <= 0
+                    || price <= 0
                     || Strings.isNullOrEmpty(costingCode)
                     || Strings.isNullOrEmpty(costingCode2)
                     || Strings.isNullOrEmpty(costingCode3)

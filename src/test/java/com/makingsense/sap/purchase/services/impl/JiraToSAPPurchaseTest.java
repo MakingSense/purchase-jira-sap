@@ -103,6 +103,7 @@ public class JiraToSAPPurchaseTest {
         when(ticket.getDepartment()).thenReturn(DEPARTMENT_KEY);
         when(ticket.getProject()).thenReturn(PROJECT_KEY);
         when(ticket.getQuantity()).thenReturn(23f);
+        when(ticket.getTotal()).thenReturn(0.1f);
         when(ticket.getTicketId()).thenReturn("TicketId");
         when(ticket.getEmail()).thenReturn("johndoe@test.com");
         when(ticket.getLocation()).thenReturn(LOCATION_KEY);

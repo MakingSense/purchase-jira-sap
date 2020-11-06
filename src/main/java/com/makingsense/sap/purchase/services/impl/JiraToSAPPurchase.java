@@ -86,6 +86,7 @@ public class JiraToSAPPurchase implements MigrateToSAP<Purchase, JiraPurchaseTic
                 .setItemCode(itemCode)
                 .setItemDescription(description)
                 .setQuantity(ticket.getQuantity())
+                .setPrice(ticket.getTotal())
                 .setBusinessUnit(businessUnitMap.get(ticket.getBusinessUnit()))
                 .setDepartment(departmentMap.get(ticket.getDepartment()))
                 .setLocation(costingCode3)

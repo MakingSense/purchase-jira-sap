@@ -2,6 +2,7 @@ package com.makingsense.sap.purchase.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -13,8 +14,11 @@ import java.time.LocalDate;
  */
 public class JiraPurchaseTicket {
 
-    @Min(value = 1, message = "The quantity of items must be at least 1.")
+    @Min(value = 1, message = "The quantity attribute is mandatory and must be at least 1.")
     private float quantity;
+
+    @DecimalMin(value = "0.01", message = "The total attribute is mandatory and must be greater than 0.01")
+    private float total;
 
     @NotBlank(message = "The company is mandatory.")
     private String company;
@@ -63,6 +67,10 @@ public class JiraPurchaseTicket {
 
     public float getQuantity() {
         return quantity;
+    }
+
+    public float getTotal() {
+        return total;
     }
 
     public String getCompany() {
@@ -117,6 +125,7 @@ public class JiraPurchaseTicket {
     public String toString() {
         return "JiraPurchaseTicket {" +
                 "quantity=" + quantity +
+                ", total=" + total +
                 ", company='" + company + '\'' +
                 ", businessUnit='" + businessUnit + '\'' +
                 ", department='" + department + '\'' +
