@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Strings;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 /**
@@ -146,23 +147,23 @@ public class DocumentLines {
             return this;
         }
 
-        public DocumentLinesBuilder setBusinessUnit(final String businessUnit) {
-            this.costingCode = businessUnit;
+        public DocumentLinesBuilder setBusinessUnit(final Optional<String> businessUnit) {
+            businessUnit.ifPresent(bu -> this.costingCode = bu);
             return this;
         }
 
-        public DocumentLinesBuilder setDepartment(final String department) {
-            this.costingCode2 = department;
+        public DocumentLinesBuilder setDepartment(final Optional<String> department) {
+            department.ifPresent(de -> this.costingCode2 = de);
             return this;
         }
 
-        public DocumentLinesBuilder setLocation(final String location) {
-            this.costingCode3 = location;
+        public DocumentLinesBuilder setLocation(final Optional<String> location) {
+            location.ifPresent(lo -> this.costingCode3 = lo);
             return this;
         }
 
-        public DocumentLinesBuilder setProject(final String project) {
-            this.costingCode4 = project;
+        public DocumentLinesBuilder setProject(final Optional<String> project) {
+            project.ifPresent(pr -> this.costingCode4 = pr);
             return this;
         }
 

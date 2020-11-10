@@ -9,15 +9,14 @@ import com.makingsense.sap.purchase.services.MigrateToSAP;
 
 import java.time.LocalDate;
 import java.util.Collections;
-import java.util.Date;
-import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 /**
  * The main responsibility is to communicate with SAP service to create a new purchase
@@ -29,18 +28,6 @@ public class JiraToSAPPurchase implements MigrateToSAP<Purchase, JiraPurchaseTic
     private final static Logger LOGGER = LoggerFactory.getLogger(JiraPurchaseTicket.class);
 
     private final SAPRepository sapRepositoryImpl;
-
-    @Value("#{${sap.purchase.mapping.business.unit}}")
-    private Map<String, String> businessUnitMap;
-
-    @Value("#{${sap.purchase.mapping.deparment}}")
-    private Map<String, String> departmentMap;
-
-    @Value("#{${sap.purchase.mapping.location}}")
-    private Map<String, String> locationMap;
-
-    @Value("#{${sap.purchase.mapping.project}}")
-    private Map<String, String> projectMap;
 
     @Value("${sap.purchase.description.max.length}")
     private int maxDescriptionLength;
@@ -87,10 +74,10 @@ public class JiraToSAPPurchase implements MigrateToSAP<Purchase, JiraPurchaseTic
                 .setItemDescription(description)
                 .setQuantity(ticket.getQuantity())
                 .setPrice(ticket.getTotal())
-                .setBusinessUnit(businessUnitMap.get(ticket.getBusinessUnit()))
-                .setDepartment(departmentMap.get(ticket.getDepartment()))
-                .setLocation(costingCode3)
-                .setProject(projectMap.get(ticket.getProject()))
+                .setBusinessUnit(getMappingValue(ticket.getBusinessUnit()))
+                .setDepartment(getMappingValue(ticket.getDepartment()))
+                .setLocation(getMappingValue(costingCode3))
+                .setProject(getMappingValue(ticket.getProject()))
                 .build();
 
         final Purchase purchase = new Purchase.PurchaseBuilder()
@@ -107,4 +94,15 @@ public class JiraToSAPPurchase implements MigrateToSAP<Purchase, JiraPurchaseTic
 
         return purchase;
     }
+
+    private Optional<String> getMappingValue(final String input) {
+        Optional response = Optional.empty();
+
+        if (!Strings.isNullOrEmpty(input)) {
+            response = Optional.of(input.split("-")[0]);
+        }
+
+        return response;
+    }
+
 }

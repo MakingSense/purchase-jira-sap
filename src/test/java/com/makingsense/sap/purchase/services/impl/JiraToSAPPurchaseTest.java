@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Map;
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -38,24 +36,12 @@ public class JiraToSAPPurchaseTest {
 
     private static final String PROJECT_KEY = "Default project";
 
-    private Map<String, String> businessUnitMap = Collections.singletonMap(BUSINESS_UNIT_KEY, "1000");
-
-    private Map<String, String> departmentMap = Collections.singletonMap(DEPARTMENT_KEY, "1000");
-
-    private Map<String, String> locationMap = Collections.singletonMap(LOCATION_KEY, "1000");
-
-    private Map<String, String> projectMap = Collections.singletonMap(PROJECT_KEY, "1000");
-
     @BeforeEach
     public void setUp() {
         repository = mock(SAPRepository.class);
 
         target = new JiraToSAPPurchase(repository);
 
-        ReflectionTestUtils.setField(target, "businessUnitMap", businessUnitMap);
-        ReflectionTestUtils.setField(target, "departmentMap", departmentMap);
-        ReflectionTestUtils.setField(target, "locationMap", locationMap);
-        ReflectionTestUtils.setField(target, "projectMap", projectMap);
         ReflectionTestUtils.setField(target, "itemCode", "100");
         ReflectionTestUtils.setField(target, "maxDescriptionLength", 100);
     }
