@@ -99,7 +99,7 @@ public class JiraToSAPPurchase implements MigrateToSAP<Purchase, JiraPurchaseTic
         Optional response = Optional.empty();
 
         if (!Strings.isNullOrEmpty(input)) {
-            response = Optional.of(input.split("-")[0]);
+            response = Optional.of(input.split("-")[0].trim());
         }
 
         return response;
