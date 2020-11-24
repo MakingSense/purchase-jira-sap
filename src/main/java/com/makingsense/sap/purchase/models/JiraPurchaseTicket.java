@@ -40,6 +40,10 @@ public class JiraPurchaseTicket {
     @NotBlank(message = "The ticket project is mandatory.")
     private String project;
 
+    @Pattern(regexp = "[a-zA-Z]+[ ]*-[ ]*[a-zA-Z0-9]+[ ]*-[ ]*[a-zA-Z0-9[ ]*]+", message = "Item code has invalid format.")
+    @NotBlank(message = "The item code is mandatory.")
+    private String itemCode;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @NotNull(message = "The ticket creation date is mandatory.")
     private LocalDate creationDate;
@@ -98,6 +102,10 @@ public class JiraPurchaseTicket {
         return project;
     }
 
+    public String getItemCode() {
+        return itemCode;
+    }
+
     public LocalDate getCreationDate() {
         return creationDate;
     }
@@ -136,6 +144,7 @@ public class JiraPurchaseTicket {
                 ", department='" + department + '\'' +
                 ", location='" + location + '\'' +
                 ", project='" + project + '\'' +
+                ", itemCode='" + itemCode + '\'' +
                 ", creationDate=" + creationDate +
                 ", dateOfPayment=" + dateOfPayment +
                 ", ticketId='" + ticketId + '\'' +

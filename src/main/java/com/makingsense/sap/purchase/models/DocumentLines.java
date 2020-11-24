@@ -5,7 +5,6 @@ import com.google.common.base.Strings;
 
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 /**
  * Represents the information of a purchase in SAP.
@@ -101,6 +100,42 @@ public class DocumentLines {
                 costingCode4);
     }
 
+    public int getLineNum() {
+        return lineNum;
+    }
+
+    public String getItemCode() {
+        return itemCode;
+    }
+
+    public String getItemDescription() {
+        return itemDescription;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public String getCostingCode() {
+        return costingCode;
+    }
+
+    public String getCostingCode2() {
+        return costingCode2;
+    }
+
+    public String getCostingCode3() {
+        return costingCode3;
+    }
+
+    public String getCostingCode4() {
+        return costingCode4;
+    }
+
     public static class DocumentLinesBuilder {
 
         private int lineNum;
@@ -126,8 +161,8 @@ public class DocumentLines {
             return this;
         }
 
-        public DocumentLinesBuilder setItemCode(final String itemCode) {
-            this.itemCode = itemCode;
+        public DocumentLinesBuilder setItemCode(final Optional<String> itemCode) {
+            itemCode.ifPresent(item -> this.itemCode = item);
             return this;
         }
 
