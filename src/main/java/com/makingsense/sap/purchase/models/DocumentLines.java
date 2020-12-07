@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Strings;
 
 import java.util.Objects;
-import java.util.function.Consumer;
+import java.util.Optional;
 
 /**
  * Represents the information of a purchase in SAP.
@@ -100,6 +100,42 @@ public class DocumentLines {
                 costingCode4);
     }
 
+    public int getLineNum() {
+        return lineNum;
+    }
+
+    public String getItemCode() {
+        return itemCode;
+    }
+
+    public String getItemDescription() {
+        return itemDescription;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public String getCostingCode() {
+        return costingCode;
+    }
+
+    public String getCostingCode2() {
+        return costingCode2;
+    }
+
+    public String getCostingCode3() {
+        return costingCode3;
+    }
+
+    public String getCostingCode4() {
+        return costingCode4;
+    }
+
     public static class DocumentLinesBuilder {
 
         private int lineNum;
@@ -125,8 +161,8 @@ public class DocumentLines {
             return this;
         }
 
-        public DocumentLinesBuilder setItemCode(final String itemCode) {
-            this.itemCode = itemCode;
+        public DocumentLinesBuilder setItemCode(final Optional<String> itemCode) {
+            itemCode.ifPresent(item -> this.itemCode = item);
             return this;
         }
 
@@ -146,23 +182,23 @@ public class DocumentLines {
             return this;
         }
 
-        public DocumentLinesBuilder setBusinessUnit(final String businessUnit) {
-            this.costingCode = businessUnit;
+        public DocumentLinesBuilder setBusinessUnit(final Optional<String> businessUnit) {
+            businessUnit.ifPresent(bu -> this.costingCode = bu);
             return this;
         }
 
-        public DocumentLinesBuilder setDepartment(final String department) {
-            this.costingCode2 = department;
+        public DocumentLinesBuilder setDepartment(final Optional<String> department) {
+            department.ifPresent(de -> this.costingCode2 = de);
             return this;
         }
 
-        public DocumentLinesBuilder setLocation(final String location) {
-            this.costingCode3 = location;
+        public DocumentLinesBuilder setLocation(final Optional<String> location) {
+            location.ifPresent(lo -> this.costingCode3 = lo);
             return this;
         }
 
-        public DocumentLinesBuilder setProject(final String project) {
-            this.costingCode4 = project;
+        public DocumentLinesBuilder setProject(final Optional<String> project) {
+            project.ifPresent(pr -> this.costingCode4 = pr);
             return this;
         }
 

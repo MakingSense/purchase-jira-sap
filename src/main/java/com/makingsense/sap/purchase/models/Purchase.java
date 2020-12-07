@@ -93,6 +93,10 @@ public class Purchase {
         return company;
     }
 
+    public List<DocumentLines> getDocumentLines() {
+        return documentLines;
+    }
+
     @Override
     public String toString() {
         return "Purchase {" +

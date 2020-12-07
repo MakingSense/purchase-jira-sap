@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 /**
@@ -23,17 +24,25 @@ public class JiraPurchaseTicket {
     @NotBlank(message = "The company is mandatory.")
     private String company;
 
+    @Pattern(regexp = "[a-zA-Z0-9]+[ ]*-[ ]*[a-zA-Z0-9[ ]*]+", message = "Business unit attribute has invalid format.")
     @NotBlank(message = "The business unit is mandatory.")
     private String businessUnit;
 
-    @NotBlank(message = "The ticket business unit is mandatory.")
+    @Pattern(regexp = "[a-zA-Z0-9]+[ ]*-[ ]*[a-zA-Z0-9[ ]*]+", message = "Department attribute has invalid format.")
+    @NotBlank(message = "The department is mandatory.")
     private String department;
 
+    @Pattern(regexp = "[a-zA-Z0-9]+[ ]*-[ ]*[a-zA-Z0-9[ ]*]+", message = "Location attribute has invalid format.")
     @NotBlank(message = "The ticket location is mandatory.")
     private String location;
 
+    @Pattern(regexp = "[a-zA-Z0-9]+[ ]*-[ ]*[a-zA-Z0-9[ ]*]+", message = "Project attribute has invalid format.")
     @NotBlank(message = "The ticket project is mandatory.")
     private String project;
+
+    @Pattern(regexp = "[a-zA-Z]+[ ]*-[ ]*[a-zA-Z0-9]+[ ]*-[ ]*[a-zA-Z0-9[ ]*]+", message = "Item code has invalid format.")
+    @NotBlank(message = "The item code is mandatory.")
+    private String itemCode;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @NotNull(message = "The ticket creation date is mandatory.")
@@ -93,6 +102,10 @@ public class JiraPurchaseTicket {
         return project;
     }
 
+    public String getItemCode() {
+        return itemCode;
+    }
+
     public LocalDate getCreationDate() {
         return creationDate;
     }
@@ -131,6 +144,7 @@ public class JiraPurchaseTicket {
                 ", department='" + department + '\'' +
                 ", location='" + location + '\'' +
                 ", project='" + project + '\'' +
+                ", itemCode='" + itemCode + '\'' +
                 ", creationDate=" + creationDate +
                 ", dateOfPayment=" + dateOfPayment +
                 ", ticketId='" + ticketId + '\'' +
