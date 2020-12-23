@@ -38,6 +38,9 @@ public class DocumentLines {
     @JsonProperty("CostingCode4")
     private String costingCode4;
 
+    @JsonProperty("Currency")
+    private String currency;
+
     /**
      * Default constructor. Used by jackson.
      */
@@ -54,6 +57,7 @@ public class DocumentLines {
         this.costingCode2 = builder.costingCode2;
         this.costingCode3 = builder.costingCode3;
         this.costingCode4 = builder.costingCode4;
+        this.currency = builder.currency;
     }
 
     @Override
@@ -68,6 +72,7 @@ public class DocumentLines {
                 ", costingCode2='" + costingCode2 + '\'' +
                 ", costingCode3='" + costingCode3 + '\'' +
                 ", costingCode4='" + costingCode4 + '\'' +
+                ", currency='" + currency + '\'' +
                 '}';
     }
 
@@ -136,6 +141,10 @@ public class DocumentLines {
         return costingCode4;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
     public static class DocumentLinesBuilder {
 
         private int lineNum;
@@ -155,6 +164,8 @@ public class DocumentLines {
         private String costingCode3;
 
         private String costingCode4;
+
+        private String currency;
 
         public DocumentLinesBuilder setLineNum(final int lineNum) {
             this.lineNum = lineNum;
@@ -202,6 +213,11 @@ public class DocumentLines {
             return this;
         }
 
+        public DocumentLinesBuilder setCurrency(final String currency) {
+            this.currency = currency;
+            return this;
+        }
+
         public DocumentLines build() {
             if (Strings.isNullOrEmpty(itemCode)
                     || Strings.isNullOrEmpty(itemDescription)
@@ -210,7 +226,8 @@ public class DocumentLines {
                     || Strings.isNullOrEmpty(costingCode)
                     || Strings.isNullOrEmpty(costingCode2)
                     || Strings.isNullOrEmpty(costingCode3)
-                    || Strings.isNullOrEmpty(costingCode4)) {
+                    || Strings.isNullOrEmpty(costingCode4)
+                    || Strings.isNullOrEmpty(currency)) {
                 throw new IllegalArgumentException("Not all mandatory fields were provided.");
             }
             return new DocumentLines(this);

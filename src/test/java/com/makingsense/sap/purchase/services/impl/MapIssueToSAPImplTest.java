@@ -1,7 +1,9 @@
 package com.makingsense.sap.purchase.services.impl;
 
+import com.makingsense.sap.purchase.data.source.SAPSourceFactory;
 import com.makingsense.sap.purchase.models.JiraPurchaseTicket;
 import com.makingsense.sap.purchase.models.Purchase;
+import com.makingsense.sap.purchase.services.CurrencyFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -12,6 +14,9 @@ import java.util.UUID;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -22,9 +27,13 @@ public class MapIssueToSAPImplTest {
 
     private MapIssueToSAPImpl target;
 
+    private CurrencyFactory currencyFactory;
+
     @BeforeEach
     public void setUp() {
-        target = new MapIssueToSAPImpl();
+        currencyFactory = mock(CurrencyFactory.class);
+
+        target = new MapIssueToSAPImpl(currencyFactory);
         ReflectionTestUtils.setField(target, "maxDescriptionLength", 100);
     }
 
@@ -32,9 +41,12 @@ public class MapIssueToSAPImplTest {
     public void shouldMigrateTicket() {
         // Arrange
         final JiraPurchaseTicket ticket = createValidTicket();
+        final String currency = "USD";
+
+        when(currencyFactory.getCurrency(any(), anyString(), anyBoolean())).thenReturn(currency);
 
         // Act
-        final Purchase actual = target.mapToPurchase(ticket);
+        final Purchase actual = target.mapToPurchase(ticket, "msargTest");
 
         // Assert
         assertThat(actual.getDocumentLines().get(0).getItemCode(), is("A0001"));
@@ -42,6 +54,7 @@ public class MapIssueToSAPImplTest {
         assertThat(actual.getDocumentLines().get(0).getCostingCode2(), is("200"));
         assertThat(actual.getDocumentLines().get(0).getCostingCode3(), is("300"));
         assertThat(actual.getDocumentLines().get(0).getCostingCode4(), is("400"));
+        assertThat(actual.getDocumentLines().get(0).getCurrency(), is(currency));
     }
 
     @Test
@@ -51,7 +64,7 @@ public class MapIssueToSAPImplTest {
 
         // Act, Assert
         assertThrows(IllegalArgumentException.class,
-                () -> target.mapToPurchase(ticket),
+                () -> target.mapToPurchase(ticket, "msargTest"),
                 "When ticket does not contain mandatory fields an exception should be thrown.");
     }
 

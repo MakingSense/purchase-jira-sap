@@ -19,8 +19,6 @@ import java.util.Optional;
 @Component
 public class SAPSourceFactoryImpl implements SAPSourceFactory {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SAPSourceFactoryImpl.class);
-
     private final Map<String, SAPSource> sapSources;
 
     @Autowired

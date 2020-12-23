@@ -6,8 +6,11 @@ import com.makingsense.sap.purchase.errors.InvalidSAPDBException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -28,6 +31,11 @@ public class SAPSourceFactoryImplTest {
 
     @BeforeEach
     public void setUp() {
+        final String key = "doppler_test.inline.USD";
+        final String company = "DOPPLER_TEST";
+        final String currency = "USD";
+        boolean d = key.contains(company.toLowerCase()) && key.contains(currency);
+
         properties = mock(SAPConfigurationProperties.class);
 
         source = mock(SAPSource.class);

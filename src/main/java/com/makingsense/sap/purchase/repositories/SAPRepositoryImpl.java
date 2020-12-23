@@ -1,5 +1,6 @@
 package com.makingsense.sap.purchase.repositories;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.makingsense.sap.purchase.data.source.SAPSourceFactory;
 import com.makingsense.sap.purchase.models.Purchase;
 import com.makingsense.sap.purchase.data.source.SAPSource;
@@ -47,7 +48,8 @@ public class SAPRepositoryImpl implements SAPRepository {
 
     private final RestTemplate restTemplate;
 
-    private final SAPSourceFactory sapSourceFactory;
+    @Autowired
+    private ObjectMapper mapper;
 
     @Value("${sap.purchase.login.path:Login}")
     private String loginPath;
@@ -63,10 +65,8 @@ public class SAPRepositoryImpl implements SAPRepository {
 
     @Autowired
     public SAPRepositoryImpl(final RestTemplate restTemplate,
-                             final Retry sapRetry,
-                             final SAPSourceFactory sapSourceFactory) {
+                             final Retry sapRetry) {
         this.restTemplate = restTemplate;
-        this.sapSourceFactory = sapSourceFactory;
 
         decorated = Retry.decorateFunction(sapRetry, (HttpEntity entity) -> this.executeWithRetry(entity));
     }
@@ -77,9 +77,7 @@ public class SAPRepositoryImpl implements SAPRepository {
      * @return  a {@link ResponseEntity} that contains the session information to be used later on.
      */
 
-    private ResponseEntity<String> login(final String company) {
-        final SAPSource source = sapSourceFactory.getSource(company);
-
+    private ResponseEntity<String> login(final SAPSource source) {
         final HttpEntity<SAPSource> entity = new HttpEntity<>(source);
 
         final ResponseEntity<String> response = restTemplate.exchange(loginPath,
@@ -92,14 +90,21 @@ public class SAPRepositoryImpl implements SAPRepository {
         return response;
     }
 
-    public Purchase createPurchase(final Purchase ticket) {
+    public Purchase createPurchase(final Purchase ticket, final SAPSource source) {
         LOGGER.debug("A new purchase will be created in SAP: {}.", ticket);
 
-        final HttpHeaders headers = login(ticket.getCompany()).getHeaders();
+        final HttpHeaders headers = login(source).getHeaders();
 
         final MultiValueMap<String, String> sessionHeader = createSessionHeader(headers);
 
         final HttpEntity entity = new HttpEntity(ticket, sessionHeader);
+
+        try {
+            mapper.writerWithDefaultPrettyPrinter();
+            LOGGER.info("To send = {}", mapper.writeValueAsString(ticket));
+        } catch (final Exception ex) {
+            LOGGER.error("ERROR");
+        }
 
         final ResponseEntity<Purchase> response = decorated.apply(entity);
 

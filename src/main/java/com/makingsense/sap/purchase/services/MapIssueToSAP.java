@@ -5,5 +5,5 @@ import com.makingsense.sap.purchase.models.Purchase;
 
 public interface MapIssueToSAP {
 
-    Purchase mapToPurchase(final JiraPurchaseTicket ticket);
+    Purchase mapToPurchase(final JiraPurchaseTicket ticket, final String company);
 }

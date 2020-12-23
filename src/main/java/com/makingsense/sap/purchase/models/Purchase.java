@@ -38,6 +38,9 @@ public class Purchase {
     @JsonProperty("U_CreatorName")
     private String creatorDisplayName;
 
+    @JsonProperty("DocCurrency")
+    private String currency;
+
     @JsonIgnore
     private String company;
 
@@ -79,6 +82,7 @@ public class Purchase {
         this.creatorEmail = builder.creatorEmail;
         this.creatorDisplayName = builder.creatorDisplayName;
         this.company = builder.company;
+        this.currency = builder.currency;
     }
 
     public int getDocEntry() {
@@ -107,6 +111,7 @@ public class Purchase {
                 ", jiraId='" + jiraId + '\'' +
                 ", creatorEmail='" + creatorEmail + '\'' +
                 ", creatorName='" + creatorDisplayName + '\'' +
+                ", currency='" + currency + '\'' +
                 '}';
     }
 
@@ -158,6 +163,8 @@ public class Purchase {
 
         private String company;
 
+        private String currency;
+
         public PurchaseBuilder withDocument(final List<DocumentLines> documentLines) {
             this.documentLines = documentLines;
             return this;
@@ -190,6 +197,11 @@ public class Purchase {
 
         public PurchaseBuilder setCompany(final String company) {
             this.company = company;
+            return this;
+        }
+
+        public PurchaseBuilder setCurrency(final String currency) {
+            this.currency = currency;
             return this;
         }
 
