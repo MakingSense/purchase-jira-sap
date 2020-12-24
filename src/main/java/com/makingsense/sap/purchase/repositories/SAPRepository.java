@@ -1,5 +1,6 @@
 package com.makingsense.sap.purchase.repositories;
 
+import com.makingsense.sap.purchase.data.source.SAPSource;
 import com.makingsense.sap.purchase.models.Purchase;
 
 /**
@@ -13,5 +14,5 @@ public interface SAPRepository {
      * @param ticket    the ticket information to be created.
      * @return  the created {@link Purchase}.
      */
-    Purchase createPurchase(final Purchase ticket);
+    Purchase createPurchase(final Purchase ticket, final SAPSource sapSource);
 }

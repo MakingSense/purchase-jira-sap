@@ -45,10 +45,6 @@ public class JiraPurchaseTicket {
     private String itemCode;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @NotNull(message = "The ticket creation date is mandatory.")
-    private LocalDate creationDate;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @NotNull(message = "The date of payment is mandatory.")
     private LocalDate dateOfPayment;
 
@@ -67,6 +63,9 @@ public class JiraPurchaseTicket {
 
     @NotBlank(message = "The ticket description is mandatory.")
     private String description;
+
+    @NotBlank(message = "The currency is mandatory.")
+    private String currency;
 
     /**
      * Default constructor
@@ -106,10 +105,6 @@ public class JiraPurchaseTicket {
         return itemCode;
     }
 
-    public LocalDate getCreationDate() {
-        return creationDate;
-    }
-
     public LocalDate getDateOfPayment() {
         return dateOfPayment;
     }
@@ -134,6 +129,10 @@ public class JiraPurchaseTicket {
         return description;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
     @Override
     public String toString() {
         return "JiraPurchaseTicket {" +
@@ -145,13 +144,13 @@ public class JiraPurchaseTicket {
                 ", location='" + location + '\'' +
                 ", project='" + project + '\'' +
                 ", itemCode='" + itemCode + '\'' +
-                ", creationDate=" + creationDate +
                 ", dateOfPayment=" + dateOfPayment +
                 ", ticketId='" + ticketId + '\'' +
                 ", creator='" + creator + '\'' +
                 ", email='" + email + '\'' +
                 ", creatorDisplayName='" + creatorDisplayName + '\'' +
                 ", description='" + description + '\'' +
+                ", currency='" + currency + '\'' +
                 '}';
     }
 }

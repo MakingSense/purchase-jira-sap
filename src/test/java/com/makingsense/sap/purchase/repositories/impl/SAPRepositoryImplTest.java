@@ -35,16 +35,13 @@ public class SAPRepositoryImplTest {
 
     private Retry retry;
 
-    private SAPSourceFactory factory;
-
     @BeforeEach
     public void setUp() {
         restTemplate = mock(RestTemplate.class);
         //retry = mock(Retry.class);
         retry = Retry.ofDefaults("id");
-        factory = mock(SAPSourceFactory.class);
 
-        target = new SAPRepositoryImpl(restTemplate, retry, factory);
+        target = new SAPRepositoryImpl(restTemplate, retry);
 
         ReflectionTestUtils.setField(target, "loginPath", "Login");
         ReflectionTestUtils.setField(target, "purchaseRequestPath", "PurchaseRequests");
@@ -58,7 +55,6 @@ public class SAPRepositoryImplTest {
         when(purchase.getCompany()).thenReturn(company);
 
         final SAPSource sapSource = mock(SAPSource.class);
-        when(factory.getSource(company)).thenReturn(sapSource);
         final HttpEntity<SAPSource> entity = new HttpEntity<>(sapSource);
 
         final ResponseEntity<String> response = mock(ResponseEntity.class);
@@ -82,7 +78,7 @@ public class SAPRepositoryImplTest {
         when(purchaseResponse.getBody()).thenReturn(expected);
 
         // Act
-        final Purchase actual = target.createPurchase(purchase);
+        final Purchase actual = target.createPurchase(purchase, sapSource);
 
         // Assert
         assertThat(actual, is(expected));

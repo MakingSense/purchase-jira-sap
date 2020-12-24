@@ -4,9 +4,11 @@ import com.google.common.base.Strings;
 import com.makingsense.sap.purchase.models.DocumentLines;
 import com.makingsense.sap.purchase.models.JiraPurchaseTicket;
 import com.makingsense.sap.purchase.models.Purchase;
+import com.makingsense.sap.purchase.services.CurrencyFactory;
 import com.makingsense.sap.purchase.services.MapIssueToSAP;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -19,8 +21,15 @@ public class MapIssueToSAPImpl implements MapIssueToSAP {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MapIssueToSAPImpl.class);
 
+    private final CurrencyFactory currencyFactory;
+
     @Value("${sap.purchase.description.max.length}")
     private int maxDescriptionLength;
+
+    @Autowired
+    public MapIssueToSAPImpl(final CurrencyFactory currencyFactory) {
+        this.currencyFactory = currencyFactory;
+    }
 
     /**
      * Creates a new {@link Purchase} based on a {@link JiraPurchaseTicket}.
@@ -28,7 +37,7 @@ public class MapIssueToSAPImpl implements MapIssueToSAP {
      * @param ticket    the {@link JiraPurchaseTicket} information
      * @return          a {@link Purchase}
      */
-    public Purchase mapToPurchase(final JiraPurchaseTicket ticket) {
+    public Purchase mapToPurchase(final JiraPurchaseTicket ticket, final String company) {
         LOGGER.debug("About to map ticket: [{}].", ticket);
         final String description = Strings.isNullOrEmpty(ticket.getDescription()) ? "" :
                 ticket.getDescription().substring(0, Math.min(ticket.getDescription().length(), maxDescriptionLength));
@@ -43,6 +52,7 @@ public class MapIssueToSAPImpl implements MapIssueToSAP {
                 .setDepartment(getMappingValue(ticket.getDepartment(), 0))
                 .setLocation(getMappingValue(ticket.getLocation(), 0))
                 .setProject(getMappingValue(ticket.getProject(), 0))
+                .setCurrency(currencyFactory.getCurrency(company, ticket.getCurrency(), true))
                 .build();
 
         final Purchase purchase = new Purchase.PurchaseBuilder()
@@ -53,6 +63,7 @@ public class MapIssueToSAPImpl implements MapIssueToSAP {
                 .setCreatorEmail(ticket.getEmail())
                 .setCreatorName(ticket.getCreatorDisplayName())
                 .setCompany(ticket.getCompany())
+                .setCurrency(currencyFactory.getCurrency(company, ticket.getCurrency(), false))
                 .build();
 
         LOGGER.debug("Jira ticket mapped to SAP Purchase: [{}].", purchase);

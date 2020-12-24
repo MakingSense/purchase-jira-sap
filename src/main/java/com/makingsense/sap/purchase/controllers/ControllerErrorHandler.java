@@ -27,7 +27,7 @@ public class ControllerErrorHandler {
 
     @ExceptionHandler(InvalidCredentialsException.class)
     public ResponseEntity<SAPPurchaseError> handleUnauthorizedException(final InvalidCredentialsException ex) {
-        LOGGER.error("There was a problem when generating the session with SAP. Exception = [{}].", ex);
+        LOGGER.error("There was a problem when generating the session with SAP.", ex);
 
         final SAPPurchaseError error = new SAPPurchaseError(ErrorCodes.SAP_UNAUTHORIZED_REQUEST);
 
@@ -36,7 +36,7 @@ public class ControllerErrorHandler {
 
     @ExceptionHandler(SAPBadRequestException.class)
     public ResponseEntity<SAPPurchaseError> handleBadRequests(final SAPBadRequestException ex) {
-        LOGGER.error("There was a problem in the request made to SAP. Exception = [{}].", ex);
+        LOGGER.error("There was a problem in the request made to SAP.", ex);
 
         final SAPPurchaseError error = new SAPPurchaseError(ErrorCodes.SAP_BAD_REQUEST_REQUEST);
 
@@ -53,7 +53,7 @@ public class ControllerErrorHandler {
                 .get()
                 .getDefaultMessage();
 
-        LOGGER.error("There is a problem in the request. Exception = [{}].", ex.getMessage());
+        LOGGER.error("There is a problem in the request.", ex);
 
         final SAPPurchaseError error = new SAPPurchaseError(ErrorCodes.ARGUMENT_VALIDATION_BAD_REQUEST,
                  firstErrorMessage);
@@ -63,7 +63,7 @@ public class ControllerErrorHandler {
 
     @ExceptionHandler(InvalidSAPDBException.class)
     public ResponseEntity<SAPPurchaseError> handleInvalidDBException(final InvalidSAPDBException ex) {
-        LOGGER.error("There was a problem when getting SAP DB information. Exception = [{}].", ex);
+        LOGGER.error("There was a problem when getting SAP DB information.", ex);
 
         final SAPPurchaseError error = new SAPPurchaseError(ErrorCodes.SAP_INVALID_DB);
 
@@ -72,8 +72,8 @@ public class ControllerErrorHandler {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<SAPPurchaseError> handleNotReadableException(final HttpMessageNotReadableException ex) {
-        LOGGER.error("There is a problem in the request. Check request fields. Exception = [{}].",
-                ex.getClass().getCanonicalName());
+        LOGGER.error("There is a problem in the request. Check request fields.",
+                ex);
 
         final SAPPurchaseError smError = new SAPPurchaseError(ErrorCodes.GENERAL_BAD_REQUEST);
 
@@ -82,7 +82,7 @@ public class ControllerErrorHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<SAPPurchaseError> handleGeneralException(final Exception ex) {
-        LOGGER.error("An error occurred while processing the request. Exception = [{}].", ex.getClass().getCanonicalName());
+        LOGGER.error("An error occurred while processing the request.", ex);
 
         final SAPPurchaseError smError = new SAPPurchaseError(ErrorCodes.INTERNAL_SERVER_ERROR);
 

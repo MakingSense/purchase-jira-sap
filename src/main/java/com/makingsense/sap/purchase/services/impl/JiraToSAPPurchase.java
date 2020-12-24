@@ -1,5 +1,7 @@
 package com.makingsense.sap.purchase.services.impl;
 
+import com.makingsense.sap.purchase.data.source.SAPSource;
+import com.makingsense.sap.purchase.data.source.SAPSourceFactory;
 import com.makingsense.sap.purchase.models.JiraPurchaseTicket;
 import com.makingsense.sap.purchase.models.Purchase;
 import com.makingsense.sap.purchase.repositories.SAPRepository;
@@ -20,11 +22,15 @@ public class JiraToSAPPurchase implements MigrateToSAP<Purchase, JiraPurchaseTic
 
     private final MapIssueToSAP mapIssueToSAP;
 
+    private final SAPSourceFactory sapSourceFactory;
+
     @Autowired
     public JiraToSAPPurchase(final SAPRepository sapRepositoryImpl,
-                             final MapIssueToSAP mapIssueToSAP) {
+                             final MapIssueToSAP mapIssueToSAP,
+                             final SAPSourceFactory sapSourceFactory) {
         this.sapRepositoryImpl = sapRepositoryImpl;
         this.mapIssueToSAP = mapIssueToSAP;
+        this.sapSourceFactory = sapSourceFactory;
     }
 
     /**
@@ -35,9 +41,11 @@ public class JiraToSAPPurchase implements MigrateToSAP<Purchase, JiraPurchaseTic
      */
     @Override
     public Purchase migrate(final JiraPurchaseTicket ticket) {
-        final Purchase purchase = mapIssueToSAP.mapToPurchase(ticket);
+        final SAPSource source = sapSourceFactory.getSource(ticket.getCompany());
 
-        return sapRepositoryImpl.createPurchase(purchase);
+        final Purchase purchase = mapIssueToSAP.mapToPurchase(ticket, source.getDb());
+
+        return sapRepositoryImpl.createPurchase(purchase, source);
     }
 
 }
