@@ -36,7 +36,7 @@ public class JiraPurchaseTicket {
     @NotBlank(message = "The ticket location is mandatory.")
     private String location;
 
-    @Pattern(regexp = "[a-zA-Z0-9]+[ ]*-[ ]*[a-zA-Z0-9[ ]*]+", message = "Project attribute has invalid format.")
+    @Pattern(regexp = "[a-zA-Z0-9]+[ ]*-.+", message = "Project attribute has invalid format.")
     @NotBlank(message = "The ticket project is mandatory.")
     private String project;
 
