@@ -75,6 +75,7 @@ public class MapIssueToSAPImplTest {
 
         when(ticket.getDescription()).thenReturn("ItemDescription");
         when(ticket.getBusinessUnit()).thenReturn("100 - Test Business Unit");
+        when(ticket.getCurrency()).thenReturn("USD");
         when(ticket.getCompany()).thenReturn("Company");
         when(ticket.getCreator()).thenReturn(accountId);
         when(ticket.getCreatorDisplayName()).thenReturn("John Doe");
