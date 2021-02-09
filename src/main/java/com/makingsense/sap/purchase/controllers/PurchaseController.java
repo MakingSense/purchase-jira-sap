@@ -1,5 +1,6 @@
 package com.makingsense.sap.purchase.controllers;
 
+import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.makingsense.sap.purchase.models.JiraPurchaseTicket;
@@ -41,6 +42,10 @@ public class PurchaseController {
         this.mapper = mapper.copy();
         final SimpleModule module = new SimpleModule();
         module.addSerializer(Purchase.class, new PurchaseSerializer());
+        mapper.configure(
+                JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature(),
+                true
+        );
 
         this.mapper.registerModule(module);
     }
