@@ -40,7 +40,7 @@ public class JiraPurchaseTicket {
     @NotBlank(message = "The ticket project is mandatory.")
     private String project;
 
-    @Pattern(regexp = "[a-zA-Z]+[ ]*-[ ]*[a-zA-Z0-9]+[ ]*-[ ]*[a-zA-Z0-9[ ]*]+", message = "Item code has invalid format.")
+    @Pattern(regexp = "[a-zA-Z]+[ ]*-[ ]*[a-zA-Z0-9]+[ ]*-.+", message = "Item code has invalid format.")
     @NotBlank(message = "The item code is mandatory.")
     private String itemCode;
 
