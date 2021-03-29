@@ -75,7 +75,7 @@ public class MapIssueToSAPImpl implements MapIssueToSAP {
         Optional response = Optional.empty();
 
         if (!Strings.isNullOrEmpty(input)) {
-            response = Optional.of(input.split("-")[index].trim());
+            response = Optional.of(input.split("/")[index].trim());
         }
 
         return response;

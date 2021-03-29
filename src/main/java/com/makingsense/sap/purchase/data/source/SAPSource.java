@@ -62,4 +62,13 @@ public class SAPSource {
     public int hashCode() {
         return Objects.hash(db, user, password);
     }
+
+    @Override
+    public String toString() {
+        return "SAPSource{"
+                + "db='" + db + '\''
+                + ", user='" + user + '\''
+                + ", password='" + password + '\''
+                + '}';
+    }
 }

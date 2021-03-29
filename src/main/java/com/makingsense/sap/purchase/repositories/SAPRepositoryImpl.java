@@ -78,6 +78,7 @@ public class SAPRepositoryImpl implements SAPRepository {
      */
 
     private ResponseEntity<String> login(final SAPSource source) {
+        LOGGER.info("SAPSource to be used: [{}].", source);
         final HttpEntity<SAPSource> entity = new HttpEntity<>(source);
 
         final ResponseEntity<String> response = restTemplate.exchange(loginPath,
