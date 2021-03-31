@@ -68,7 +68,6 @@ public class SAPSource {
         return "SAPSource{"
                 + "db='" + db + '\''
                 + ", user='" + user + '\''
-                + ", password='" + password + '\''
                 + '}';
     }
 }
