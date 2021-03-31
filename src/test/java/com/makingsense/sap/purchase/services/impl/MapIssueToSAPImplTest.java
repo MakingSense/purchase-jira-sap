@@ -74,20 +74,20 @@ public class MapIssueToSAPImplTest {
         final JiraPurchaseTicket ticket = mock(JiraPurchaseTicket.class);
 
         when(ticket.getDescription()).thenReturn("ItemDescription");
-        when(ticket.getBusinessUnit()).thenReturn("100 - Test Business Unit");
+        when(ticket.getBusinessUnit()).thenReturn("100 / Test Business Unit");
         when(ticket.getCurrency()).thenReturn("USD");
         when(ticket.getCompany()).thenReturn("Company");
         when(ticket.getCreator()).thenReturn(accountId);
         when(ticket.getCreatorDisplayName()).thenReturn("John Doe");
         when(ticket.getDateOfPayment()).thenReturn(LocalDate.now());
-        when(ticket.getDepartment()).thenReturn("200 - Test Department");
-        when(ticket.getLocation()).thenReturn("300 - Test Location");
-        when(ticket.getProject()).thenReturn("400 - Test Project");
+        when(ticket.getDepartment()).thenReturn("200 / Test Department");
+        when(ticket.getLocation()).thenReturn("300 / Test Location");
+        when(ticket.getProject()).thenReturn("400 / Test Project");
         when(ticket.getQuantity()).thenReturn(23f);
         when(ticket.getTotal()).thenReturn(0.1f);
         when(ticket.getTicketId()).thenReturn("TicketId");
         when(ticket.getEmail()).thenReturn("johndoe@test.com");
-        when(ticket.getItemCode()).thenReturn("US-A0001 - Test Item code");
+        when(ticket.getItemCode()).thenReturn("US/A0001 / Test Item code");
 
         return ticket;
     }

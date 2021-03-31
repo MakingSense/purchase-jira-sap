@@ -24,7 +24,7 @@ public class JiraPurchaseTicket {
     @NotBlank(message = "The company is mandatory.")
     private String company;
 
-    @Pattern(regexp = "[a-zA-Z0-9]+[ ]*/.+", message = "Business unit attribute has invalid format.")
+    @Pattern(regexp = ".+[ ]*/.+", message = "Business unit attribute has invalid format.")
     @NotBlank(message = "The business unit is mandatory.")
     private String businessUnit;
 
