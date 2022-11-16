@@ -140,7 +140,7 @@ public class SAPRepositoryImpl implements SAPRepository {
         }};
 
         LOGGER.debug("The Cookie header was created.");
-
+    
         return cookieHeader;
     }
 

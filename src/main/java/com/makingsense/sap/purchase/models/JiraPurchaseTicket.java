@@ -2,24 +2,19 @@ package com.makingsense.sap.purchase.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents the information of a purchased stored in Jira as a ticket.
  */
 public class JiraPurchaseTicket {
-
-    @Min(value = 1, message = "The quantity attribute is mandatory and must be at least 1.")
-    private float quantity;
-
-    @DecimalMin(value = "0.01", message = "The total attribute is mandatory and must be greater than 0.01")
-    private float total;
 
     @NotBlank(message = "The company is mandatory.")
     private String company;
@@ -32,17 +27,9 @@ public class JiraPurchaseTicket {
     @NotBlank(message = "The department is mandatory.")
     private String department;
 
-    @Pattern(regexp = "[a-zA-Z0-9]+[ ]*/.+", message = "Location attribute has invalid format.")
-    @NotBlank(message = "The ticket location is mandatory.")
-    private String location;
-
     @Pattern(regexp = "[a-zA-Z0-9]+[ ]*/.+", message = "Project attribute has invalid format.")
     @NotBlank(message = "The ticket project is mandatory.")
     private String project;
-
-    @Pattern(regexp = "[a-zA-Z]+[ ]*/[ ]*[a-zA-Z0-9]+[ ]*/.+", message = "Item code has invalid format.")
-    @NotBlank(message = "The item code is mandatory.")
-    private String itemCode;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @NotNull(message = "The date of payment is mandatory.")
@@ -67,18 +54,14 @@ public class JiraPurchaseTicket {
     @NotBlank(message = "The currency is mandatory.")
     private String currency;
 
+    @NotEmpty
+    List<JiraPurchaseItem> items;
+
     /**
      * Default constructor
      */
     public JiraPurchaseTicket() {
-    }
-
-    public float getQuantity() {
-        return quantity;
-    }
-
-    public float getTotal() {
-        return total;
+        items = new ArrayList<>();
     }
 
     public String getCompany() {
@@ -93,16 +76,8 @@ public class JiraPurchaseTicket {
         return department;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
     public String getProject() {
         return project;
-    }
-
-    public String getItemCode() {
-        return itemCode;
     }
 
     public LocalDate getDateOfPayment() {
@@ -133,24 +108,24 @@ public class JiraPurchaseTicket {
         return currency;
     }
 
+    public List<JiraPurchaseItem> getItems() {
+        return items;
+    }
+
     @Override
     public String toString() {
-        return "JiraPurchaseTicket {" +
-                "quantity=" + quantity +
-                ", total=" + total +
-                ", company='" + company + '\'' +
-                ", businessUnit='" + businessUnit + '\'' +
-                ", department='" + department + '\'' +
-                ", location='" + location + '\'' +
-                ", project='" + project + '\'' +
-                ", itemCode='" + itemCode + '\'' +
-                ", dateOfPayment=" + dateOfPayment +
-                ", ticketId='" + ticketId + '\'' +
-                ", creator='" + creator + '\'' +
-                ", email='" + email + '\'' +
-                ", creatorDisplayName='" + creatorDisplayName + '\'' +
-                ", description='" + description + '\'' +
-                ", currency='" + currency + '\'' +
-                '}';
+        return "JiraPurchaseTicket {"
+                + ", company='" + company + '\''
+                + ", businessUnit='" + businessUnit + '\''
+                + ", department='" + department + '\''
+                + ", project='" + project + '\''
+                + ", dateOfPayment=" + dateOfPayment
+                + ", ticketId='" + ticketId + '\''
+                + ", creator='" + creator + '\''
+                + ", email='" + email + '\''
+                + ", creatorDisplayName='" + creatorDisplayName + '\''
+                + ", description='" + description + '\''
+                + ", currency='" + currency + '\''
+                + '}';
     }
 }

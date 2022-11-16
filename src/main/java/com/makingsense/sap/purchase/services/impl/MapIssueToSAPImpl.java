@@ -2,6 +2,7 @@ package com.makingsense.sap.purchase.services.impl;
 
 import com.google.common.base.Strings;
 import com.makingsense.sap.purchase.models.DocumentLines;
+import com.makingsense.sap.purchase.models.JiraPurchaseItem;
 import com.makingsense.sap.purchase.models.JiraPurchaseTicket;
 import com.makingsense.sap.purchase.models.Purchase;
 import com.makingsense.sap.purchase.services.CurrencyFactory;
@@ -13,7 +14,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -42,21 +44,29 @@ public class MapIssueToSAPImpl implements MapIssueToSAP {
         final String description = Strings.isNullOrEmpty(ticket.getDescription()) ? "" :
                 ticket.getDescription().substring(0, Math.min(ticket.getDescription().length(), maxDescriptionLength));
 
-        final DocumentLines document = new DocumentLines.DocumentLinesBuilder()
-                .setLineNum(0)
-                .setItemCode(getMappingValue(ticket.getItemCode(), 1))
-                .setItemDescription(description)
-                .setQuantity(ticket.getQuantity())
-                .setPrice(ticket.getTotal())
-                .setBusinessUnit(getMappingValue(ticket.getBusinessUnit(), 0))
-                .setDepartment(getMappingValue(ticket.getDepartment(), 0))
-                .setLocation(getMappingValue(ticket.getLocation(), 0))
-                .setProject(getMappingValue(ticket.getProject(), 0))
-                .setCurrency(currencyFactory.getCurrency(company, ticket.getCurrency(), true))
-                .build();
+        final List<DocumentLines> documents = new ArrayList<>();
+        for (int i = 0; i < ticket.getItems().size(); i++) {
+
+            final JiraPurchaseItem jiraPurchaseItem = ticket.getItems().get(i);
+            LOGGER.debug("Item [{}] of the request: [{}].", i + 1, jiraPurchaseItem);
+            final DocumentLines sapDocumentLine = new DocumentLines.DocumentLinesBuilder()
+                    .setLineNum(i)
+                    .setItemCode(getMappingValue(jiraPurchaseItem.getItemCode(), 1))
+                    .setItemDescription(description)
+                    .setQuantity(jiraPurchaseItem.getQuantity())
+                    .setPrice(jiraPurchaseItem.getUnitPrice())
+                    .setBusinessUnit(getMappingValue(ticket.getBusinessUnit(), 0))
+                    .setDepartment(getMappingValue(ticket.getDepartment(), 0))
+                    .setLocation(getMappingValue(jiraPurchaseItem.getLocation(), 0))
+                    .setProject(getMappingValue(ticket.getProject(), 0))
+                    .setCurrency(currencyFactory.getCurrency(company, ticket.getCurrency(), true))
+                    .build();
+
+            documents.add(sapDocumentLine);
+        }
 
         final Purchase purchase = new Purchase.PurchaseBuilder()
-                .withDocument(Collections.singletonList(document))
+                .withDocument(documents)
                 .setRequriedDate(ticket.getDateOfPayment())
                 .setDocDate(LocalDate.now())
                 .setJiraTicketId(ticket.getTicketId())

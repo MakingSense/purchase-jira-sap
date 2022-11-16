@@ -1,6 +1,6 @@
 package com.makingsense.sap.purchase.services.impl;
 
-import com.makingsense.sap.purchase.data.source.SAPSourceFactory;
+import com.makingsense.sap.purchase.models.JiraPurchaseItem;
 import com.makingsense.sap.purchase.models.JiraPurchaseTicket;
 import com.makingsense.sap.purchase.models.Purchase;
 import com.makingsense.sap.purchase.services.CurrencyFactory;
@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -71,6 +72,12 @@ public class MapIssueToSAPImplTest {
     private JiraPurchaseTicket createValidTicket() {
         final String accountId = UUID.randomUUID().toString();
 
+        final JiraPurchaseItem item = mock(JiraPurchaseItem.class);
+        when(item.getQuantity()).thenReturn(23f);
+        when(item.getUnitPrice()).thenReturn(0.1f);
+        when(item.getLocation()).thenReturn("300 / Test Location");
+        when(item.getItemCode()).thenReturn("US/A0001 / Test Item code");
+
         final JiraPurchaseTicket ticket = mock(JiraPurchaseTicket.class);
 
         when(ticket.getDescription()).thenReturn("ItemDescription");
@@ -81,13 +88,10 @@ public class MapIssueToSAPImplTest {
         when(ticket.getCreatorDisplayName()).thenReturn("John Doe");
         when(ticket.getDateOfPayment()).thenReturn(LocalDate.now());
         when(ticket.getDepartment()).thenReturn("200 / Test Department");
-        when(ticket.getLocation()).thenReturn("300 / Test Location");
         when(ticket.getProject()).thenReturn("400 / Test Project");
-        when(ticket.getQuantity()).thenReturn(23f);
-        when(ticket.getTotal()).thenReturn(0.1f);
         when(ticket.getTicketId()).thenReturn("TicketId");
         when(ticket.getEmail()).thenReturn("johndoe@test.com");
-        when(ticket.getItemCode()).thenReturn("US/A0001 / Test Item code");
+        when(ticket.getItems()).thenReturn(Collections.singletonList(item));
 
         return ticket;
     }
